@@ -22,6 +22,7 @@ public class SettingsMenu : MonoBehaviour
     public void ChangeVolume(float volume)
     {
         audioSource.volume = volume;
+       
         Save(volume);
     }
 
@@ -40,6 +41,7 @@ public class SettingsMenu : MonoBehaviour
         if (!PlayerPrefs.HasKey("musicVolume"))
         {
             ChangeVolume(initalValume);
+            volumeSlider.value = initalValume;
             /*  Load();*/
         }
         else

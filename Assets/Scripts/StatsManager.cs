@@ -2,7 +2,7 @@ using CodeMonkey.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 public class GameStats
 {
@@ -19,6 +19,8 @@ public class StatsManager : MonoBehaviour
 {
 
     [SerializeField] GUIMeshText timer;
+    [SerializeField] GUIMeshText accurecyUI;
+    [SerializeField] GUIMeshText wordsTypedUI;
 
     [SerializeField] public int charactersTyped;
     [SerializeField] public int charactersCorrect;
@@ -39,7 +41,10 @@ public class StatsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer.UpdateText($"Time: {time}");
+        string current_accurecy = charactersTyped > 0 ? Math.Round( (float)charactersCorrect / charactersTyped * 100) + "%" : "0%";
+        timer.UpdateText($"Time:{time}");
+        accurecyUI.UpdateText($"Accurecy:{current_accurecy}");
+        wordsTypedUI.UpdateText($"Words:{wordsTyped}");
     }
 
 
@@ -47,7 +52,8 @@ public class StatsManager : MonoBehaviour
     {
         return new GameStats
         {
-            accurecy = charactersTyped > 0 ? (float)charactersCorrect / charactersTyped * 100 + "%" : "0%",
+
+            accurecy = charactersTyped > 0 ? Math.Round((float)charactersCorrect / charactersTyped * 100) + "%" : "0%",
             charactersCorrect = charactersCorrect + "",
             charactersTyped = charactersTyped + "",
             waveReached = waveReached + "",
