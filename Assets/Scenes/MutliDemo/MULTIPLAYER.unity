@@ -180,6 +180,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff9e71d22a5f504b8ca6fce0c9a365e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  finalScoreText: {fileID: 0}
+  accuracyText: {fileID: 0}
+  waveReachedText: {fileID: 0}
+  statsPanel: {fileID: 0}
+  canvasManager: {fileID: 0}
 --- !u!212 &36483947
 SpriteRenderer:
   m_ObjectHideFlags: 0

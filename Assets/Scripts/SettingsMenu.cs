@@ -7,12 +7,15 @@ public class SettingsMenu : MonoBehaviour
 {
     [SerializeField]
     Slider volumeSlider;
-    private const float fullVolume = 1;
-    [SerializeField]
+    private const float initalValume = 0.004690917f;
+
+
+
     private AudioSource audioSource;
 
     private void Start()
     {
+        audioSource = BackgroundMusic.Instance.musicPlayer;
         InitMusicVolume();
     }
 
@@ -36,7 +39,7 @@ public class SettingsMenu : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("musicVolume"))
         {
-            Save(fullVolume);
+            ChangeVolume(initalValume);
             /*  Load();*/
         }
         else

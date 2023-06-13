@@ -940,9 +940,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 484554966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09517dc75828b6c43a4ae32ab07c2709, type: 3}
+  m_Script: {fileID: 11500000, guid: dd203c41633a79247a5eb32e41d17f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicPlayer: {fileID: 484554967}
 --- !u!1 &622387845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1930,7 +1931,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeSlider: {fileID: 196661980}
-  audioSource: {fileID: 484554967}
 --- !u!114 &1214615979
 MonoBehaviour:
   m_ObjectHideFlags: 0
