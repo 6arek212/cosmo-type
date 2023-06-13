@@ -9,11 +9,10 @@ public class ExistMenu : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject Loading;
     [SerializeField] private bool enablePause;
     public static bool MenuIsActive = false;
-
-
+    private bool isGameOver = false;
     private void Update()
     {
-        if (!Input.GetKeyDown(KeyCode.Escape)) return;
+        if (!Input.GetKeyDown(KeyCode.Escape)|| isGameOver) return;
 
         if (MenuIsActive)
         {
@@ -26,6 +25,7 @@ public class ExistMenu : MonoBehaviourPunCallbacks
 
 
     }
+
 
 
     public void ShowMenu()
@@ -60,4 +60,10 @@ public class ExistMenu : MonoBehaviourPunCallbacks
         HideMenu();
         SceneManager.LoadScene("MAIN_MENU");
     }
+
+    public void SetGameOver()
+    {
+        isGameOver = true;
+    }
+
 }
