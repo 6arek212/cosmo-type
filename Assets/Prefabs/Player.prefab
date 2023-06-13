@@ -4936,7 +4936,7 @@ GameObject:
   - component: {fileID: 779712693121017758}
   m_Layer: 0
   m_Name: Turret Large
-  m_TagString: Untagged
+  m_TagString: Shooting
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5022,7 +5022,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletObject: {fileID: 6231678630676928226, guid: e9898a65c447a5646b6f36c4d741dce8, type: 3}
   explosion: {fileID: 100002, guid: cafecd3fc3b761c45bb1553f35cf5c96, type: 3}
-  targetsManager: {fileID: 0}
   shoot_effect: {fileID: 100002, guid: 565cdc2ed7b030a41accd8f00ae59a50, type: 3}
   shootSoundEffect: {fileID: 8300000, guid: 05bc727344d395747964c2caf5a062c7, type: 3}
   expSoundEffect: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}

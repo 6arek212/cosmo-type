@@ -18,6 +18,7 @@ TagManager:
   - RightCharButton
   - CharacterPicker
   - CharcaterPickerManager
+  - Shooting
   layers:
   - Default
   - TransparentFX

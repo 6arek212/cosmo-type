@@ -58,7 +58,7 @@ public class TargetsManager : MonoBehaviour
 
     [SerializeField] GameObject WavePanel;
 
-    [SerializeField] private int wave = 1;
+    [SerializeField] public int wave = 1;
 
     [SerializeField] float currentIntialSpeed = 4;
 
@@ -162,7 +162,7 @@ public class TargetsManager : MonoBehaviour
     {
 
         WavePanel.SetActive(true);
-        WavePanel.GetComponentInChildren<TMP_Text>().text = message ;
+        WavePanel.GetComponentInChildren<TMP_Text>().text = message;
         yield return new WaitForSeconds(2);
         WavePanel.SetActive(false);
         isUIMessageDiplayed = false;

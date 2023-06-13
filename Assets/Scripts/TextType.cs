@@ -33,7 +33,7 @@ public class TextType : MonoBehaviour
     [SerializeField] private AudioClip expSoundEffect;
     [SerializeField] private GameObject hit_effect;
 
-
+    private ShootingScript shooting;
     private Mover shipMover;
     private int currentWordLength;
     private string fullText;
@@ -43,7 +43,7 @@ public class TextType : MonoBehaviour
     void Start()
 
     {
-
+        shooting = GameObject.FindGameObjectWithTag("Shooting").GetComponent<ShootingScript>();
         shipMover = GetComponent<Mover>();
 
         targetsManager = GameObject.FindGameObjectWithTag("TargetsManager").GetComponent<TargetsManager>();
@@ -131,7 +131,7 @@ public class TextType : MonoBehaviour
             {
                 currentWordLength = words.First().text.Length;
                 text.UpdateText(words.First());
-                KeyboardLanguageChanger.ChangeKeyboardLanguage(words.First().lang);
+                shooting.SetLanguage(words.First().lang);
             }
         }
     }

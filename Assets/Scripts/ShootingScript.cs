@@ -30,14 +30,16 @@ public class ShootingScript : MonoBehaviour
 
     private TargetsManager targetsManager;
 
+    private StatsManager statsManager;
+
+    private LangKey currentLangKey = LangKey.ENGLISH;
 
 
 
     void Start()
     {
-        // change to defualt keyboard
-    /*    KeyboardLanguageChanger.ChangeKeyboardLanguage();*/
         targetsManager = GameObject.FindGameObjectWithTag("TargetsManager").GetComponent<TargetsManager>();
+        statsManager = GameObject.FindGameObjectWithTag("StatsManager").GetComponent<StatsManager>();
     }
 
 
@@ -46,6 +48,9 @@ public class ShootingScript : MonoBehaviour
         string pressedKey = Input.inputString; //get the pressed key
         if (string.IsNullOrEmpty(pressedKey) || targetsManager.Count == 0)
             return;
+
+        pressedKey = pressedKey.First().Translate(currentLangKey).ToString();
+
 
         // Find a new target if we dont have one already
         if (currentTarget == null && LockOnTarget(pressedKey) == null)
@@ -65,22 +70,18 @@ public class ShootingScript : MonoBehaviour
             textType.RemoveFirstChar();
             textType.ChangeCurrentWordColor();
             Shoot();
-
-
-    
-      
+            statsManager.IncreaseCorrectCharactersTyped();
         }
         else
         {
             playMissSound();
         }
 
-    
- 
+        statsManager.IncreaseCharactersTyped();
+
         // if we finished the current word then change to defualt keyboard
         if (textType.FullTextLength == 0)
-            KeyboardLanguageChanger.ChangeKeyboardLanguage();
-
+            currentLangKey = LangKey.ENGLISH;
     }
 
     GameObject LockOnTarget(string pressedKey)
@@ -147,6 +148,15 @@ public class ShootingScript : MonoBehaviour
         obj.transform.parent = transform;
     }
 
-
+    public void SetLanguage(LangKey langKey) => currentLangKey = langKey;
+    public void SetLanguage(string langKey)
+    {
+        if (langKey == "he")
+        {
+            currentLangKey = LangKey.HEBREW;
+            return;
+        }
+        currentLangKey = LangKey.ENGLISH;
+    }
 
 }

@@ -75,10 +75,6 @@ public class ShootingScriptNetwork : MonoBehaviour
         {
             playMissSound();
         }
-
-        // if we finished the current word then change to defualt keyboard
-        if (textType.FullTextLength == 0)
-            KeyboardLanguageChanger.ChangeKeyboardLanguage();
     }
 
     GameObject LockOnTarget(string pressedKey)

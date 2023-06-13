@@ -9,19 +9,27 @@ public class DangerZoneScript : MonoBehaviour
 {
     private const string enemyTag = "Enemy";
     private float dely = 0.5f;
+    private StatsManager statsManager;
+    private TargetsManager targetsManager;
+
+    private void Start()
+    {
+        targetsManager = GameObject.FindGameObjectWithTag("TargetsManager").GetComponent<TargetsManager>();
+        statsManager = GameObject.FindGameObjectWithTag("StatsManager").GetComponent<StatsManager>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(enemyTag))
-        {
-            Invoke("GameOver", dely);
-        }
+        if (collision.tag != enemyTag)
+            return;
+
+        statsManager.SetWaveReached(targetsManager.wave);
+        GameStats stats = statsManager.GetStats();
+        Debug.Log(statsManager.GetStats().accurecy);
     }
 
     //go to the game over scene.
     private void GameOver()
     {
-        int lastSceneIndex = SceneManager.sceneCountInBuildSettings - 1;
-        SceneManager.LoadScene(lastSceneIndex);
     }
 }
