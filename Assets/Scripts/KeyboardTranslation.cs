@@ -62,8 +62,8 @@ namespace Assets.Scripts
             { '\\', '|' },
             { ';', ':' },
             { '\'', '"' },
-            { ',', 'ץ' },
-            { '.', 'ת' },
+            { ',', 'ת' },
+            { '.', 'ץ' },
             { '/', '?' },
             { ' ', ' ' }
         };
@@ -71,7 +71,7 @@ namespace Assets.Scripts
 
         public static char Translate(this char ch, LangKey langKey)
         {
-            if (langKey == LangKey.HEBREW)
+            if (langKey == LangKey.HEBREW && HETranslationMap.ContainsKey(ch))
                 return HETranslationMap[ch];
             return ch;
         }
