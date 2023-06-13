@@ -5104,8 +5104,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 78035901652576001, guid: fb7d0a25221db524290d8f90af79933f, type: 3}
   currentSpeed: 0
-  initialSpeed: 0.3
-  accelerationRate: 0.03
+  initialSpeed: 1.7
+  accelerationRate: 0.04
   maxSpeed: 2
   hitMovementDistance: 0.2
 --- !u!114 &1631625092033233699
