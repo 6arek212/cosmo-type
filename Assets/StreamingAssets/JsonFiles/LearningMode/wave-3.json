@@ -1,0 +1,124 @@
+{
+  "words": [
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "light",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "אור",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "sun",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "שמש",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "door",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "דלת",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "manager",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "מנהל",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "nature",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "טבע",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "unique",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "יחודי",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "headphones",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "אוזניות",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "pair",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "זוג",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "words": [
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "hello",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "שלום",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "status",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "מצב",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "computer",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "מחשב",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "speaker",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "רמקול",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "keyboard",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "מקלדת",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "air condition",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "מזגן",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "building",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "בניין",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "world",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "עולם",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    }
+  ]
+}

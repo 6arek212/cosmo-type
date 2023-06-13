@@ -1,0 +1,99 @@
+{
+  "words": [
+    {
+      "type": 1,
+      "word": [
+        {
+          "text": "extraordinary",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "apple1",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "apple2",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "apple3",
+          "lang": "en",
+          "isRTL": false
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "banana",
+          "lang": "en",
+          "isRTL": false
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "carrot",
+          "lang": "en",
+          "isRTL": false
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "dog",
+          "lang": "en",
+          "isRTL": false
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "elephant",
+          "lang": "en",
+          "isRTL": false
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "fox",
+          "lang": "en",
+          "isRTL": false
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "grape",
+          "lang": "en",
+          "isRTL": false
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "house",
+          "lang": "en",
+          "isRTL": false
+        }
+      ]
+    }
+  ]
+}
