@@ -86,6 +86,7 @@ public class TargetsManager : MonoBehaviour
     [SerializeField] float speedIncrease = 0.04f;
     [SerializeField] int enmeyIncrease = 2;
     [SerializeField] float spawnDelayDecreas = .4f;
+    private StatsManager statsManager;
 
     private IList<InnerWord> loadedWords;
 
@@ -94,6 +95,7 @@ public class TargetsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        statsManager = GameObject.FindGameObjectWithTag("StatsManager").GetComponent<StatsManager>();
         if (mode == ModeType.TUTORIAL)
             return;
         targets = new List<GameObject>();
@@ -254,6 +256,7 @@ public class TargetsManager : MonoBehaviour
     public void RemoveTarget(GameObject gameObject)
     {
         targets.Remove(gameObject);
+        statsManager.IncreaseWordsTyped();
     }
 
     private void OnDrawGizmosSelected()
