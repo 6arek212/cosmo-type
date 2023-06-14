@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Photon.Pun;
-using UnityEngine.SceneManagement;
 using Photon.Realtime;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ExitMenuMultiPlayer : MonoBehaviourPunCallbacks
 {
@@ -16,15 +14,10 @@ public class ExitMenuMultiPlayer : MonoBehaviourPunCallbacks
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
 
         if (MenuIsActive)
-        {
             HideMenu();
-        }
         else
-        {
             ShowMenu();
-        }
     }
-
 
     public void ShowMenu()
     {
@@ -34,27 +27,24 @@ public class ExitMenuMultiPlayer : MonoBehaviourPunCallbacks
 
     public void HideMenu()
     {
-   
         MenuIsActive = false;
         ExitMenuPanel.SetActive(false);
     }
-
 
     public void LeaveGame()
     {
         PhotonNetwork.DestroyPlayerObjects(PhotonNetwork.LocalPlayer);
         PhotonNetwork.LeaveRoom();
     }
+
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
         Debug.Log("master switched");
         LeaveGame();
     }
 
-
     public override void OnLeftRoom()
     {
-
         //GO THE LOBBY
         PhotonNetwork.LocalPlayer.CustomProperties.Clear();
         SceneManager.LoadScene("MULTIPLAYERMODE");
@@ -64,9 +54,7 @@ public class ExitMenuMultiPlayer : MonoBehaviourPunCallbacks
     {
         HideMenu();
         PhotonNetwork.Disconnect();
-     
-        SceneManager.LoadScene("MAIN_MENU");
-        
-    }
 
+        SceneManager.LoadScene("MAIN_MENU");
+    }
 }

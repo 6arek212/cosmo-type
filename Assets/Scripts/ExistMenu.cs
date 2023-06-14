@@ -1,10 +1,9 @@
-
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
+
 public class ExistMenu : MonoBehaviourPunCallbacks
 {
-
     [SerializeField] private GameObject ExitMenuPanel;
     [SerializeField] private GameObject Loading;
     [SerializeField] private bool enablePause;
@@ -12,16 +11,12 @@ public class ExistMenu : MonoBehaviourPunCallbacks
     private bool isGameOver = false;
     private void Update()
     {
-        if (!Input.GetKeyDown(KeyCode.Escape)|| isGameOver) return;
+        if (!Input.GetKeyDown(KeyCode.Escape) || isGameOver) return;
 
         if (MenuIsActive)
-        {
             HideMenu();
-        }
         else
-        {
             ShowMenu();
-        }
     }
 
     // show the game menu
