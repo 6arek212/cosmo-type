@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Experimental.AI;
-public class Mover : MonoBehaviour
+using Photon.Pun;
+public class MoverNetwork : MonoBehaviour
 {
     [SerializeField]
     public Transform playerTransform;
@@ -18,6 +19,10 @@ public class Mover : MonoBehaviour
 
     [SerializeField]
     private float hitMovementDistance = 0.3f;
+
+    [SerializeField]
+    private PhotonView photonView;
+    private Vector3 currentPosition;
 
 
 
@@ -38,12 +43,16 @@ public class Mover : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        currentPosition = transform.position;
         currentSpeed = initialSpeed;
         currentTarget = playerTransform.position;
     }
 
     private void FixedUpdate()
     {
+        if (!photonView.IsMine) return;
+
+
 
         // Calculate direction from the ship to the player
         Vector3 direction = currentTarget - transform.position;
@@ -59,12 +68,28 @@ public class Mover : MonoBehaviour
         currentSpeed = Mathf.Clamp(currentSpeed, initialSpeed, maxSpeed);
     }
 
-    public void MoveUp()
+
+    public void UpdateEnemyPos()
     {
-        Vector3 direction = playerTransform.position - transform.position;
+        photonView.RPC(nameof(UpdateEnemyPosRPC), RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void UpdateEnemyPosRPC()
+    {
+        currentPosition = transform.position;
+    }
+
+    public void MoveUp(int viewId)
+    {
+
+        PhotonView otherPhotonView = PhotonView.Find(viewId);
+        Vector3 direction = playerTransform.position - otherPhotonView.gameObject.transform.position;
         direction.Normalize();
         transform.position -= direction * hitMovementDistance;
     }
+
+
 
 
     public void SetSpeed(float speed) => currentSpeed = initialSpeed = speed;

@@ -56,8 +56,9 @@ public class ExitMenuMultiPlayer : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-      
+
         //GO THE LOBBY
+        PhotonNetwork.LocalPlayer.CustomProperties.Clear();
         SceneManager.LoadScene("MULTIPLAYERMODE");
     
     }

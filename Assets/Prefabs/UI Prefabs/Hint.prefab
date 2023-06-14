@@ -102,7 +102,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: shoot the enimes by typing the words
+  m_text: Shoot the enimes by typing the words
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 603a4d04d6d855d499bcc13cf9cacd99, type: 2}
   m_sharedMaterial: {fileID: 3862174947819159572, guid: 603a4d04d6d855d499bcc13cf9cacd99, type: 2}

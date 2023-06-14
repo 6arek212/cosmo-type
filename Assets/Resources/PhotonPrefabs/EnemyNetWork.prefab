@@ -4963,9 +4963,9 @@ GameObject:
   - component: {fileID: 8025493393965406162}
   - component: {fileID: 8025493393965406165}
   - component: {fileID: 8025493393965406164}
-  - component: {fileID: 5563918314773380528}
-  - component: {fileID: 1631625092033233699}
   - component: {fileID: 5924603438139441473}
+  - component: {fileID: 1551924479263566596}
+  - component: {fileID: 1631625092033233699}
   - component: {fileID: 7494842812015400957}
   m_Layer: 0
   m_Name: EnemyNetWork
@@ -5090,47 +5090,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &5563918314773380528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8025493393965406161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1de7744dcfb57e54e95f350a91f9a872, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform: {fileID: 78035901652576001, guid: fb7d0a25221db524290d8f90af79933f, type: 3}
-  currentSpeed: 0
-  initialSpeed: 1.7
-  accelerationRate: 0.04
-  maxSpeed: 2
-  hitMovementDistance: 0.2
---- !u!114 &1631625092033233699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8025493393965406161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecce6523fe394d14dbd4b1bc29f0b53d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 8724991948728188245}
-  triggerTag: Bullet
-  explosion: {fileID: 100002, guid: cafecd3fc3b761c45bb1553f35cf5c96, type: 3}
-  explosionDestroyDelay: 0.75
-  playerController: {fileID: 0}
-  shipMover: {fileID: 0}
-  words: []
-  expSoundEffect: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
-  hit_effect: {fileID: 100002, guid: cafecd3fc3b761c45bb1553f35cf5c96, type: 3}
-  targetsManager: {fileID: 0}
-  photonView: {fileID: 5924603438139441473}
 --- !u!114 &5924603438139441473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5154,6 +5113,48 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1551924479263566596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8025493393965406161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039aadc72828d334d84ee094d487129f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 78035901652576001, guid: fb7d0a25221db524290d8f90af79933f, type: 3}
+  currentSpeed: 0
+  initialSpeed: 1.7
+  accelerationRate: 0.04
+  maxSpeed: 2
+  hitMovementDistance: 0.47
+  photonView: {fileID: 5924603438139441473}
+--- !u!114 &1631625092033233699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8025493393965406161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecce6523fe394d14dbd4b1bc29f0b53d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 8724991948728188245}
+  triggerTag: Bullet
+  explosion: {fileID: 100002, guid: cafecd3fc3b761c45bb1553f35cf5c96, type: 3}
+  explosionDestroyDelay: 0.75
+  playerController: {fileID: 0}
+  shipMover: {fileID: 0}
+  words: []
+  expSoundEffect: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
+  hit_effect: {fileID: 100002, guid: cafecd3fc3b761c45bb1553f35cf5c96, type: 3}
+  targetsManager: {fileID: 0}
+  photonView: {fileID: 5924603438139441473}
 --- !u!114 &7494842812015400957
 MonoBehaviour:
   m_ObjectHideFlags: 0

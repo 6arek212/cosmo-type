@@ -3,77 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class PlayerController : MonoBehaviourPunCallbacks
 {
+/*    [SerializeField]
+    private PhotonView photonView;
+    [SerializeField] TMP_Text accurecyText;
 
-    /*    [SerializeField] List<GameObject> targets;
-    
-    
-        [SerializeField] PhotonView photonView;
-    
-        [SerializeField] bool ranodomSpawn;
-        int _targetsAllowed = 1;
-    
-        public int Count { get { return targets.Count; } }
-    
-        public static event Action<GameObject> OnTargetRemoved;
-    
-        private EnemySpawnManager enemySpawnerManager;
-    
-    
-    
-    
-        private void Start()
-        {
-    
-            enemySpawnerManager = GameObject.FindGameObjectWithTag("EnemySpawnManager").GetComponent<EnemySpawnManager>();
-    
-        }
-    
-        public GameObject? FindTarget(GameObject gameObj, char searchChar)
-        {
-            if (!photonView.IsMine) return null;
-    
-    
-            MeshText enemyText;
-            float minDist = float.MaxValue;
-            GameObject? target = null;
-    
-    
-            var targets = enemySpawnerManager.GetTargets();
-            foreach (GameObject enemy in targets)
-            {
-                enemyText = enemy.GetComponentInChildren<MeshText>();
-                float dist = Vector3.Distance(gameObj.transform.position, enemy.transform.position);
-                if (enemyText.Length > 0 && enemyText.FirstChar() == searchChar && dist < minDist)
-                {
-                    target = enemy;
-                    minDist = dist;
-                }
-            }
-    
-            return target;
-        }
-    
-        public void RemoveTarget(GameObject gameObject)
-        {
-            if (!photonView.IsMine) return;
-    
-            enemySpawnerManager.RemoveTarget(gameObject);
-            targets.Remove(gameObject);
-            OnTargetRemoved?.Invoke(gameObject);
-            _targetsAllowed++;
-        }
-    
-    
-        public void AddTarget(GameObject target)
-        {
-            if (!photonView.IsMine) return;
-            enemySpawnerManager.RemoveTarget(target);
-            targets.Add(target);
-        }
-    
-        public int Count { get { return enemySpawnerManager.Count; } }
-    */
+    private StatsManagerNetwork statsManager;
+
+    private void Awake()
+    {
+        statsManager = GameObject.FindGameObjectWithTag("StatsManager").GetComponent<StatsManagerNetwork>();
+    }
+
+    private void Update()
+    {
+        if (!photonView.IsMine) return;
+
+        photonView.RPC("UpdateAccurecy", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void UpdateAccurecy()
+    {
+        if (!statsManager) return;
+        GameStats stats = statsManager.GetStats();
+        accurecyText.text = stats.accurecy;
+    }*/
+
 }

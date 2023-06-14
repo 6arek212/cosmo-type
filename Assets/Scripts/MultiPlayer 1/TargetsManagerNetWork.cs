@@ -13,9 +13,12 @@ public class TargetsManagerNetWork : MonoBehaviourPunCallbacks
     bool ranodomSpawn;
     int _targetsAllowed = 1;
     private EnemySpawnManager enemySpawnerManager;
+/*    private StatsManagerNetwork statsManager;
+    ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();*/
 
     private void Start()
     {
+   /*     statsManager = GameObject.FindGameObjectWithTag("StatsManager").GetComponent<StatsManagerNetwork>();*/
         enemySpawnerManager = GameObject
             .FindGameObjectWithTag("EnemySpawnManager")
             .GetComponent<EnemySpawnManager>();
@@ -84,13 +87,11 @@ public class TargetsManagerNetWork : MonoBehaviourPunCallbacks
     }
 
 
- 
-
-
     [PunRPC]
     private void RemoveTargetRPC(int viewId)
     {
         enemySpawnerManager.RemoveTarget(PhotonView.Find(viewId).gameObject);
+
     }
 
 

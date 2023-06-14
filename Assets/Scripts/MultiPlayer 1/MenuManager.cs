@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
@@ -49,3 +51,17 @@ public class MenuManager : MonoBehaviour
 
 
 }
+/*
+    private void Update()
+    {
+        photonView.RPC(nameof(StatsChanged), photonView.Owner);
+    }
+
+    [PunRPC]
+    public void StatsChanged()
+    {
+        string accurecy = charactersTyped > 0 ? Math.Round((float)charactersCorrect / charactersTyped * 100) + "%" : "0%";
+        playerProperties["accurecy"] = accurecy;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(playerProperties);
+    }*/
+
