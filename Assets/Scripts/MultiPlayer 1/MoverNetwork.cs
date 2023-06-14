@@ -9,7 +9,7 @@ public class MoverNetwork : MonoBehaviour
     [SerializeField] float currentSpeed;
 
     [SerializeField]
-    private float initialSpeed = 0.3f;
+    public float initialSpeed = 0.3f;
 
     [SerializeField]
     private float accelerationRate = 0.009f;
@@ -93,5 +93,4 @@ public class MoverNetwork : MonoBehaviour
 
 
     public void SetSpeed(float speed) => currentSpeed = initialSpeed = speed;
-
 }

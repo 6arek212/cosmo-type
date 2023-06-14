@@ -8,24 +8,21 @@ using System.Threading.Tasks;
 using System.Linq;
 using UnityEngine.Networking;
 using Assets.Scripts;
+using TMPro;
 
 // this class represents the spawn of enemies in the game
 
 public class EnemySpawnManager : MonoBehaviour
 {
     [SerializeField]
-    private Transform[] spawnPoints;
-
-    [SerializeField]
     private GameObject enemy;
 
     [SerializeField]
     List<GameObject> targets;
 
-    [SerializeField]
-    bool ranodomSpawn;
+    [SerializeField] GameObject WavePanel;
 
-    [SerializeField] int maxWave = 7;
+    [SerializeField] int maxWave = 4;
 
     [SerializeField] int wave = 1;
 
@@ -40,6 +37,12 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] int maxParrallelEnemies = 14;
 
     [SerializeField] int currentParrallelEnemiesLimit = 6;
+
+    [SerializeField] float maxSpawnHDistance = 3f;
+
+    [SerializeField] float maxSpawnVDistance = 3f;
+
+    [SerializeField] float uiDelay = 3.5f;
 
     [SerializeField] float speedIncrease = 0.04f;
     [SerializeField] int enmeyIncrease = 2;
@@ -90,11 +93,10 @@ public class EnemySpawnManager : MonoBehaviour
         while (true)
         {
             yield return StartCoroutine(LoadWordsFromFile($"wave-{wave}.json"));
-            Debug.Log("Lodaed");
 
             // update UI text
-            yield return new WaitForSeconds(3);
-
+            yield return new WaitForSeconds(1);
+            yield return StartCoroutine(UpdateUI($"Wave {wave} Starting"));
 
             // start spawner
             targets = new List<GameObject>();
@@ -105,9 +107,30 @@ public class EnemySpawnManager : MonoBehaviour
             currentIntialSpeed = Mathf.Clamp(speedIncrease + currentIntialSpeed, 1, maxSpeed);
             spawnDelay = Mathf.Clamp(spawnDelay - spawnDelayDecreas, minSpawnDelay, float.MaxValue);
             currentParrallelEnemiesLimit = Mathf.Clamp(currentParrallelEnemiesLimit + enmeyIncrease, 1, maxParrallelEnemies);
-        }
 
+            if (wave > maxWave)
+            {
+                // end game 
+                onEndGame();
+                break;
+            }
+        }
     }
+
+    private void onEndGame()
+    {
+        Debug.Log("Game Ended");
+    }
+
+    IEnumerator UpdateUI(string message)
+    {
+        WavePanel.SetActive(true);
+        WavePanel.GetComponentInChildren<TMP_Text>().text = message;
+        yield return new WaitForSeconds(uiDelay);
+        WavePanel.SetActive(false);
+        yield return new WaitForSeconds(1);
+    }
+
 
     //spawn the enemies at random spawn points.
 
@@ -119,17 +142,17 @@ public class EnemySpawnManager : MonoBehaviour
 
         foreach (List<Word> wordList in words)
         {
-            Vector3 randomPostion = spawnPoints[
-                UnityEngine.Random.Range(0, spawnPoints.Length)
-            ].position;
             obj = PhotonNetwork.Instantiate(
                 Path.Combine("PhotonPrefabs", "EnemyNetWork"),
-                randomPostion,
+                GetRandomSpawnPosition(),
                 Quaternion.identity
             );
 
             textType = obj.GetComponent<TextTypeNetwork>();
             textType.SetWords(wordList);
+
+            // set speed
+            obj.GetComponent<MoverNetwork>().SetSpeed(currentIntialSpeed);
 
             photonView.RPC("AddTarget", RpcTarget.All, obj.GetComponent<PhotonView>().ViewID);
 
@@ -162,6 +185,15 @@ public class EnemySpawnManager : MonoBehaviour
         targets.Remove(target);
     }
 
+    protected Vector3 GetRandomSpawnPosition()
+    {
+        float x = UnityEngine.Random.Range(transform.position.x - maxSpawnHDistance, transform.position.x + maxSpawnHDistance);
+        float y = UnityEngine.Random.Range(transform.position.y - maxSpawnVDistance, transform.position.y + maxSpawnVDistance);
+        return new Vector3(x, y);
+    }
 
-
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireCube(transform.position, new Vector3(maxSpawnHDistance * 2, maxSpawnVDistance * 2, 0));
+    }
 }
