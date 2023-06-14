@@ -37,14 +37,9 @@ public class StatsManagerNetwork : MonoBehaviour
 
     [SerializeField] int time = 0;
     private Coroutine timerCoroutine;
-    ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
 
 
 
-
-
-
-    // Start is called before the first frame update
     void Start()
     {
       
@@ -84,11 +79,6 @@ public class StatsManagerNetwork : MonoBehaviour
         charactersCorrect++;
     }
 
-
-
-
-/*    public void IncreaseCharactersTyped() => charactersTyped++;*/
-   /* public void IncreaseCorrectCharactersTyped() => charactersCorrect++;*/
     public void IncreaseWordsTyped() => wordsTyped++;
 
 

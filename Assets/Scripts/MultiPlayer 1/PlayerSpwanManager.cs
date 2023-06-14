@@ -19,8 +19,8 @@ public class PlayerSpwanManager : MonoBehaviour
 
         int characterIndex = GetPlayerCharacter();
         Transform spawnPoint = spawnPoints[PhotonNetwork.LocalPlayer.ActorNumber - 1];
-       PlayerController playerController =  PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", PlayersCharactersPrefabs[characterIndex].name), spawnPoint.position, Quaternion.identity, 0).GetComponent<PlayerController>();
-        playerController.SetUp(PhotonNetwork.LocalPlayer);
+         PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", PlayersCharactersPrefabs[characterIndex].name), spawnPoint.position, Quaternion.identity, 0);
+   /*     playerController.SetUp(PhotonNetwork.LocalPlayer);*/
     }
 
     public Transform GetSpawnPoint(int playerIndex)

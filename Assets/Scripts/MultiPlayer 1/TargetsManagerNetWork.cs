@@ -3,18 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-
+using Photon.Realtime;
+using TMPro;
 public class TargetsManagerNetWork : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     PhotonView photonView;
+    [SerializeField] private TMP_Text winnerName;
+    [SerializeField] private TMP_Text winnerAccurcey;
 
     [SerializeField]
     bool ranodomSpawn;
     int _targetsAllowed = 1;
     private EnemySpawnManager enemySpawnerManager;
-/*    private StatsManagerNetwork statsManager;
-    ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();*/
+    private bool isGameOver = false;
+
+
 
     private void Start()
     {
@@ -26,6 +30,9 @@ public class TargetsManagerNetWork : MonoBehaviourPunCallbacks
 
     public GameObject? FindTarget(GameObject gameObj, char searchChar)
     {
+
+        if (isGameOver) return null;
+
         MeshText enemyText;
         float minDist = float.MaxValue;
         GameObject target = null;
@@ -85,6 +92,44 @@ public class TargetsManagerNetWork : MonoBehaviourPunCallbacks
             gameObject.GetComponent<PhotonView>().ViewID
         );
     }
+
+
+    public void CheckWinner()
+    {
+        Player highestAccuracyPlayer = null;
+        float highestAccuracy = 0f;
+
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            Debug.Log(player.CustomProperties);
+
+            if (player.CustomProperties.TryGetValue("accurecy", out object accurecy))
+            {
+                Debug.Log(accurecy);
+                if (float.TryParse(accurecy.ToString().TrimEnd('%'), out float accuracy))
+                {
+                    if (accuracy > highestAccuracy)
+                    {
+                        highestAccuracy = accuracy;
+                        highestAccuracyPlayer = player;
+                    }
+                }
+             
+            }
+         
+        }
+
+        if (highestAccuracyPlayer != null)
+        {
+            winnerName.text = highestAccuracyPlayer.NickName + " WINS!!!";
+            winnerAccurcey.text = "Accurcey "+highestAccuracy;
+        }
+
+        isGameOver = true;
+
+    }
+
+
 
 
     [PunRPC]

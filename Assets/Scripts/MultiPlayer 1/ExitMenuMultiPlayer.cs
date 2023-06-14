@@ -9,11 +9,11 @@ public class ExitMenuMultiPlayer : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject ExitMenuPanel;
     public static bool MenuIsActive = false;
-
+    private bool isGameOver = false;
 
     private void Update()
     {
-        if (!Input.GetKeyDown(KeyCode.Escape)) return;
+        if (!Input.GetKeyDown(KeyCode.Escape)|| isGameOver) return;
 
         if (MenuIsActive)
         {
@@ -49,6 +49,7 @@ public class ExitMenuMultiPlayer : MonoBehaviourPunCallbacks
     }
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
+        isGameOver = true;
         Debug.Log("master switched");
         LeaveGame();
     }

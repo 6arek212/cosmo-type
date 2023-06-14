@@ -61,6 +61,11 @@ MonoBehaviour:
   - UpdateEnemyPosRPC
   - MoveUpRPC
   - UpdateAccurecyRPC
+  - UpdateUI
+  - UpdateUIRPC
+  - HideWaveRPC
+  - OnEndGameRPC
+  - GameOverRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

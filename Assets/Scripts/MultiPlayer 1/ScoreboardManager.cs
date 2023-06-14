@@ -36,6 +36,9 @@ public class ScoreboardManager : MonoBehaviourPunCallbacks
         }
     }
 
+   
+
+
 
     public void OnEnable()
     {

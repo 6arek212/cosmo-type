@@ -10,7 +10,7 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class PlayerController : MonoBehaviourPunCallbacks
 {
 
-    [SerializeField] private TMP_Text accurecyText;
+ /*   [SerializeField] private TMP_Text accurecyText;
     Player player;
     
 
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         {
             UpdatePlayerStats(targetPlayer);
             Debug.Log("---------------------accurecyyyyyyyyyyyy" + changedProps);
-            /* UpdateStats(targetPlayer);*/
+            *//* UpdateStats(targetPlayer);*//*
         }
 
     }
@@ -47,6 +47,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
 
-    }
+    }*/
 
 }

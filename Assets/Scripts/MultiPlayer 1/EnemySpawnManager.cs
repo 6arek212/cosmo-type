@@ -9,10 +9,11 @@ using System.Linq;
 using UnityEngine.Networking;
 using Assets.Scripts;
 using TMPro;
+using Photon.Realtime;
 
 // this class represents the spawn of enemies in the game
 
-public class EnemySpawnManager : MonoBehaviour
+public class EnemySpawnManager : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private GameObject enemy;
@@ -21,7 +22,7 @@ public class EnemySpawnManager : MonoBehaviour
     List<GameObject> targets;
 
     [SerializeField] GameObject WavePanel;
-
+    [SerializeField] GameObject EndGamePanel;
     [SerializeField] int maxWave = 4;
 
     [SerializeField] int wave = 1;
@@ -52,6 +53,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     [SerializeField]
     private PhotonView photonView;
+    private TargetsManagerNetWork targetsManager;
     private const string TargetsListKey = "TargetsList";
     public int Count
     {
@@ -60,6 +62,9 @@ public class EnemySpawnManager : MonoBehaviour
 
     void Start()
     {
+        targetsManager = GameObject
+     .FindGameObjectWithTag("TargetsManager")
+     .GetComponent<TargetsManagerNetWork>();
         if (PhotonNetwork.IsMasterClient)
         {
             StartCoroutine(SpawnTargets());
@@ -96,8 +101,11 @@ public class EnemySpawnManager : MonoBehaviour
 
             // update UI text
             yield return new WaitForSeconds(1);
-            yield return StartCoroutine(UpdateUI($"Wave {wave} Starting"));
 
+            UpdateUI($"Wave {wave} Starting");
+            yield return new WaitForSeconds(uiDelay);
+            HideWave();
+            yield return new WaitForSeconds(1);
             // start spawner
             targets = new List<GameObject>();
             yield return StartCoroutine(SpawnRoutine(loadedWords));
@@ -111,26 +119,22 @@ public class EnemySpawnManager : MonoBehaviour
             if (wave > maxWave)
             {
                 // end game 
-                onEndGame();
+                OnEndGame();
                 break;
             }
         }
     }
 
-    private void onEndGame()
+    [PunRPC]
+    private void OnEndGameRPC()
     {
+        EndGamePanel.SetActive(true);
+        targetsManager.CheckWinner();
         Debug.Log("Game Ended");
     }
 
-    IEnumerator UpdateUI(string message)
-    {
-        WavePanel.SetActive(true);
-        WavePanel.GetComponentInChildren<TMP_Text>().text = message;
-        yield return new WaitForSeconds(uiDelay);
-        WavePanel.SetActive(false);
-        yield return new WaitForSeconds(1);
-    }
-
+    private void OnEndGame() => photonView.RPC(nameof(OnEndGameRPC), RpcTarget.All);
+  
 
     //spawn the enemies at random spawn points.
 
@@ -164,6 +168,15 @@ public class EnemySpawnManager : MonoBehaviour
         yield return new WaitUntil(() => targets.Count == 0);
     }
 
+
+    protected Vector3 GetRandomSpawnPosition()
+    {
+        float x = UnityEngine.Random.Range(transform.position.x - maxSpawnHDistance, transform.position.x + maxSpawnHDistance);
+        float y = UnityEngine.Random.Range(transform.position.y - maxSpawnVDistance, transform.position.y + maxSpawnVDistance);
+        return new Vector3(x, y);
+    }
+
+
     // send rpc, that new target has been added to the game.
 
     [PunRPC]
@@ -174,26 +187,28 @@ public class EnemySpawnManager : MonoBehaviour
 
     }
 
-    public List<GameObject> GetTargets()
+ 
+ 
+
+    [PunRPC]
+    public void HideWaveRPC()
     {
-        return targets;
+        WavePanel.SetActive(false);
     }
 
-    //remove target from the game
-    public void RemoveTarget(GameObject target)
+
+    [PunRPC]
+    public void UpdateUIRPC(string message)
     {
-        targets.Remove(target);
+        WavePanel.SetActive(true);
+        WavePanel.GetComponentInChildren<TMP_Text>().text = message;
     }
 
-    protected Vector3 GetRandomSpawnPosition()
-    {
-        float x = UnityEngine.Random.Range(transform.position.x - maxSpawnHDistance, transform.position.x + maxSpawnHDistance);
-        float y = UnityEngine.Random.Range(transform.position.y - maxSpawnVDistance, transform.position.y + maxSpawnVDistance);
-        return new Vector3(x, y);
-    }
+    public List<GameObject> GetTargets() => targets;
+    public void RemoveTarget(GameObject target) => targets.Remove(target);
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireCube(transform.position, new Vector3(maxSpawnHDistance * 2, maxSpawnVDistance * 2, 0));
-    }
+    private void OnDrawGizmosSelected() => Gizmos.DrawWireCube(transform.position, new Vector3(maxSpawnHDistance * 2, maxSpawnVDistance * 2, 0));
+
+    public void HideWave() => photonView.RPC(nameof(HideWaveRPC), RpcTarget.All);
+    private void UpdateUI(string message) => photonView.RPC(nameof(UpdateUIRPC), RpcTarget.All, message);
 }
