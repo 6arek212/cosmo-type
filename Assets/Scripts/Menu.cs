@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
+
    [SerializeField] private string menuName;
    [SerializeField] private bool open;
 
@@ -9,7 +10,6 @@ public class Menu : MonoBehaviour
     {
         open = true;
         gameObject.SetActive(true);
- 
     }
 
     public void Close()
@@ -27,4 +27,5 @@ public class Menu : MonoBehaviour
     {
         return open;
     }
+
 }
