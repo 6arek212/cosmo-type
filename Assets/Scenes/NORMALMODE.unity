@@ -990,7 +990,7 @@ MonoBehaviour:
   dangerZone: {fileID: 0}
   WavePanel: {fileID: 811708066}
   wave: 1
-  maxWave: 7
+  maxWave: 6
   currentIntialSpeed: 1.4
   maxSpeed: 3.5
   maxSpawnHDistance: 10.6
