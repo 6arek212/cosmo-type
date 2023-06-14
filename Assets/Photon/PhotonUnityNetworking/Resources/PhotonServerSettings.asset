@@ -54,6 +54,12 @@ MonoBehaviour:
   - ChangeCurrentWordColorRPC
   - RemoveFirstCharRPC
   - LockTargetRPC
+  - UpdateAccurecy
+  - StatsChanged
+  - UpdateStatsRPC
+  - MoveEnemeyRPC
+  - UpdateEnemyPosRPC
+  - MoveUpRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

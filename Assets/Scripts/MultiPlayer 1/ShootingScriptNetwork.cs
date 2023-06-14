@@ -5,6 +5,7 @@ using static UnityEngine.GraphicsBuffer;
 using System.IO;
 
 using Photon.Pun;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 // This Script represents the enemy shooting.
 public class ShootingScriptNetwork : MonoBehaviour
@@ -18,8 +19,7 @@ public class ShootingScriptNetwork : MonoBehaviour
     [SerializeField]
     private GameObject explosion;
 
-    [SerializeField]
-    private TargetsManagerNetWork targetsManager;
+ 
 
     [SerializeField]
     private GameObject shoot_effect;
@@ -33,15 +33,18 @@ public class ShootingScriptNetwork : MonoBehaviour
     [SerializeField]
     private AudioClip missSoundEffect;
 
-    /*    [SerializeField] private PlayerController playerController;*/
 
+    private TargetsManagerNetWork targetsManager;
+    private StatsManagerNetwork statsManager;
     private GameObject currentTarget;
+
 
     private void Start()
     {
         targetsManager = GameObject
             .FindGameObjectWithTag("TargetsManager")
             .GetComponent<TargetsManagerNetWork>();
+        statsManager = GameObject.FindGameObjectWithTag("StatsManager").GetComponent<StatsManagerNetwork>();
     }
 
     void Update()
@@ -70,11 +73,17 @@ public class ShootingScriptNetwork : MonoBehaviour
             textType.RemoveFirstChar();
             textType.ChangeCurrentWordColor();
             Shoot();
+            statsManager.IncreaseCorrectCharactersTyped();
         }
         else
         {
             playMissSound();
         }
+        statsManager.IncreaseCharactersTyped();
+        GameStats stats = statsManager.GetStats();
+   
+        UpdateStats(stats.accurecy);
+
     }
 
     GameObject LockOnTarget(string pressedKey)
@@ -97,6 +106,7 @@ public class ShootingScriptNetwork : MonoBehaviour
     {
         photonView.RPC("ShootRPC", RpcTarget.All);
     }
+ 
 
     [PunRPC]
     private void ShootRPC()
@@ -132,6 +142,23 @@ public class ShootingScriptNetwork : MonoBehaviour
         ); //Spawn muzzle flash
         obj.transform.parent = transform;
     }
+
+    public void UpdateStats(string accurecy)
+    {
+        photonView.RPC(nameof(UpdateStatsRPC), photonView.Owner,accurecy);
+    }
+
+
+    [PunRPC]
+    private void UpdateStatsRPC(string accurecy)
+    {
+        Hashtable hash = new Hashtable();
+        hash.Add("accurecy", accurecy);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+      
+
+    }
+
 
     private void playShootSound()
     {

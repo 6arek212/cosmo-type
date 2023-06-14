@@ -37,7 +37,7 @@ public class TextTypeNetwork : MonoBehaviour
     private PlayerController playerController;
 
     [SerializeField]
-    private Mover shipMover;
+    private MoverNetwork shipMover;
 
     [SerializeField]
     private List<Word> words;
@@ -63,7 +63,7 @@ public class TextTypeNetwork : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shipMover = GetComponent<Mover>();
+        shipMover = GetComponent<MoverNetwork>();
 
         targetsManager = GameObject
             .FindGameObjectWithTag("TargetsManager")
@@ -144,7 +144,8 @@ public class TextTypeNetwork : MonoBehaviour
         }
         health--;
         Instantiate(hit_effect, transform.position, Quaternion.identity);
-        shipMover.MoveUp();
+        
+        shipMover.MoveUp(GetComponent<PhotonView>().ViewID);
         if (health == 0)
             ExplodeAndDestroy();
     }

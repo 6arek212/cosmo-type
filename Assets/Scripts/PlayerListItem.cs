@@ -113,7 +113,7 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
       if (!player.CustomProperties.ContainsKey("isReady"))
         {
             playerProperties["isReady"] = false;
-
+            UpdateReadyText("READY");
             return;
         }
 
@@ -142,12 +142,8 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
   
     public void UpdatePlayerAvater(Player player)
     {
-
-
         if (!characterPickerManager) return;
         characterPickerManager.UpdatePlayerAvater(player,playerAvatar);
-
-  
     }
 
 
