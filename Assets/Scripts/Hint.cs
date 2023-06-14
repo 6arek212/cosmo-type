@@ -28,5 +28,4 @@ public class Hint : MonoBehaviour
         yield return new WaitForSeconds(showFor);
         gameObject.SetActive(false);
     }
-
 }

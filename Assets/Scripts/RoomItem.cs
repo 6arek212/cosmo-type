@@ -9,18 +9,16 @@ public class RoomItem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI lobbyNameText;
     [SerializeField] private TextMeshProUGUI playersText;
     [SerializeField] private TextMeshProUGUI gameModeText;
-     private LobbyManagement manager;
+    private LobbyManagement manager;
 
     RoomInfo info;
 
 
     private void Start()
     {
-        
         manager = GameObject
             .FindGameObjectWithTag("LobbyManagement")
             .GetComponent<LobbyManagement>();
-
     }
 
 
@@ -32,18 +30,17 @@ public class RoomItem : MonoBehaviour
     }
 
 
-    public void UpdateRoom(string name,int maxPlayers,int numbOfPlayers)
+    public void UpdateRoom(string name, int maxPlayers, int numbOfPlayers)
     {
         lobbyNameText.text = name;
         playersText.text = numbOfPlayers + "/" + maxPlayers;
-     /*   gameModeText.text = lobby.Data[LobbyManager.KEY_GAME_MODE].Value;*/
-
+        /*   gameModeText.text = lobby.Data[LobbyManager.KEY_GAME_MODE].Value;*/
     }
 
 
     public void OnClickRoom()
     {
-   /*     LobbyManagement.Instance.JoinRoom(lobbyNameText.text);*/
+        /*     LobbyManagement.Instance.JoinRoom(lobbyNameText.text);*/
         manager.JoinRoom(lobbyNameText.text);
     }
 

@@ -23,8 +23,6 @@ public class ExitMenuMultiPlayer : MonoBehaviourPunCallbacks
         {
             ShowMenu();
         }
-
-
     }
 
 
@@ -60,7 +58,6 @@ public class ExitMenuMultiPlayer : MonoBehaviourPunCallbacks
         //GO THE LOBBY
         PhotonNetwork.LocalPlayer.CustomProperties.Clear();
         SceneManager.LoadScene("MULTIPLAYERMODE");
-    
     }
 
     public void LeaveMultiPlayerLobby()

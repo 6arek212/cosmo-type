@@ -21,7 +21,7 @@ namespace Assets.Scripts
     {
         private readonly static Dictionary<char, char> HETranslationMap = new Dictionary<char, char>()
         {
-              { 'a', 'ש' },
+            { 'a', 'ש' },
             { 'b', 'נ' },
             { 'c', 'ב' },
             { 'd', 'ג' },
@@ -71,13 +71,11 @@ namespace Assets.Scripts
             { ' ', ' ' }
         };
 
-
         public static char Translate(this char ch, LangKey langKey)
         {
             if (langKey == LangKey.HEBREW && HETranslationMap.ContainsKey(ch))
                 return HETranslationMap[ch];
             return ch;
         }
-
     }
 }

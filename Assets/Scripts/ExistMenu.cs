@@ -46,7 +46,6 @@ public class ExistMenu : MonoBehaviourPunCallbacks
         ExitMenuPanel.SetActive(false);
     }
 
-
     public void LeaveMultiPlayerLobby()
     {
         HideMenu();

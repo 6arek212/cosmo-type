@@ -6,7 +6,7 @@ using Photon.Realtime;
 public class RoomList : MonoBehaviourPunCallbacks
 {
 
-    [SerializeField] private RoomItem  roomItemPrefab;
+    [SerializeField] private RoomItem roomItemPrefab;
     private List<RoomItem> roomItemsList = new List<RoomItem>();
     [SerializeField] Transform contentObject;
 
@@ -16,19 +16,15 @@ public class RoomList : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-
         if (Time.time >= nextUpdateTime)
         {
             UpdateRoomList(roomList);
-        nextUpdateTime = Time.time + timeBetweenUpdates;
+            nextUpdateTime = Time.time + timeBetweenUpdates;
+        }
     }
-
-
-}
 
     public void UpdateRoomList(List<RoomInfo> list)
     {
-
         //updating the current list
         foreach (RoomItem item in roomItemsList)
         {
@@ -43,8 +39,6 @@ public class RoomList : MonoBehaviourPunCallbacks
             RoomItem newRoom = Instantiate(roomItemPrefab, contentObject); // instantiate inb the content
             newRoom.UpdateRoom(room.Name, room.MaxPlayers, room.PlayerCount);
             roomItemsList.Add(newRoom);
-
         }
-
     }
 }

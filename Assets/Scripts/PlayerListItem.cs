@@ -32,16 +32,13 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
        .GetComponent<LobbyManagement>();
         readyBtn = GameObject
        .FindGameObjectWithTag("ReadyButton");
-        characterPickerManager= GameObject
+        characterPickerManager = GameObject
        .FindGameObjectWithTag("CharcaterPickerManager")
        .GetComponent<CharcaterPickerManager>();
         Button myButton = readyBtn.GetComponent<Button>();
         readyText = readyBtn.GetComponentInChildren<TMP_Text>();
         myButton.onClick.AddListener(OnReadyClicked);
-
-
     }
-
 
     public void SetUp(Player player)
     {
@@ -53,8 +50,7 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-      
-        if(this.player == otherPlayer)
+        if (this.player == otherPlayer)
         {
             Destroy(gameObject);
             manager.CheckGameReady();
@@ -69,7 +65,6 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
 
     public void OnReadyClicked()
     {
-    
         bool isReady = (bool)playerProperties["isReady"];
         if (isReady)
         {
@@ -86,7 +81,7 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
-        if (this.player != targetPlayer ) return;
+        if (this.player != targetPlayer) return;
 
         Debug.Log(changedProps);
         Debug.Log("Players List Updated");
@@ -100,17 +95,11 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
             UpdatePlayerStatus(targetPlayer);
             manager.CheckGameReady();
         }
-    
-     
-
     }
 
     public void UpdatePlayerStatus(Player player)
-
     {
-  
-      
-      if (!player.CustomProperties.ContainsKey("isReady"))
+        if (!player.CustomProperties.ContainsKey("isReady"))
         {
             playerProperties["isReady"] = false;
             UpdateReadyText("READY");
@@ -139,15 +128,11 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
         readyText.text = text;
     }
 
-  
+
     public void UpdatePlayerAvater(Player player)
     {
         if (!characterPickerManager) return;
-        characterPickerManager.UpdatePlayerAvater(player,playerAvatar);
+        characterPickerManager.UpdatePlayerAvater(player, playerAvatar);
     }
-
-
-
-
 
 }

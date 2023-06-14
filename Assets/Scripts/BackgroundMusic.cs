@@ -10,7 +10,6 @@ public class BackgroundMusic : MonoBehaviour
 
     void Awake()
     {
-
         if (Instance)
         {
             Destroy(gameObject); // there can only be one

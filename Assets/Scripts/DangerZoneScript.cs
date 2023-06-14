@@ -30,7 +30,6 @@ public class DangerZoneScript : MonoBehaviour
     private GameObject canvasManager;
 
 
-
     private void Start()
     {
         targetsManager = GameObject.FindGameObjectWithTag("TargetsManager").GetComponent<TargetsManager>();
@@ -64,7 +63,6 @@ public class DangerZoneScript : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MAIN_MENU");
-
     }
 
 }

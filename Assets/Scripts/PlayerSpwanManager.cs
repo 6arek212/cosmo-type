@@ -13,13 +13,12 @@ public class PlayerSpwanManager : MonoBehaviour
         SpawnPlayer();
     }
 
- 
+
     public void SpawnPlayer()
     {
-
         int characterIndex = GetPlayerCharacter();
         Transform spawnPoint = spawnPoints[PhotonNetwork.LocalPlayer.ActorNumber - 1];
-       PlayerController playerController =  PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", PlayersCharactersPrefabs[characterIndex].name), spawnPoint.position, Quaternion.identity, 0).GetComponent<PlayerController>();
+        PlayerController playerController = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", PlayersCharactersPrefabs[characterIndex].name), spawnPoint.position, Quaternion.identity, 0).GetComponent<PlayerController>();
         playerController.SetUp(PhotonNetwork.LocalPlayer);
     }
 
@@ -31,16 +30,10 @@ public class PlayerSpwanManager : MonoBehaviour
 
     public int GetPlayerCharacter()
     {
-
-
         if (!playerProperties.ContainsKey("playerAvatar")) return 0;
-   
 
         int avatarIndex = (int)playerProperties["playerAvatar"];
         return avatarIndex;
-
-
     }
-
 
 }

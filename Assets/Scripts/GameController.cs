@@ -23,12 +23,12 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
     //destroy the word and do sound and expl effects.
-   void CompleteWord()
+    void CompleteWord()
     {
         if (targetsManager.Count <= 0)
         {
@@ -39,9 +39,7 @@ public class GameController : MonoBehaviour
 
     //move to the next lvl
     public void GoToNextLvl()
-
     {
-       
         if (!isTutorialCompleted)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -49,8 +47,5 @@ public class GameController : MonoBehaviour
         }
 
         TutorialCompletedScreen.SetActive(true);
-        
     }
- 
-   
 }
