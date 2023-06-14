@@ -22,7 +22,7 @@ public class SettingsMenu : MonoBehaviour
     public void ChangeVolume(float volume)
     {
         audioSource.volume = volume;
-       
+
         Save(volume);
     }
 

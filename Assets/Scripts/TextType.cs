@@ -117,6 +117,8 @@ public class TextType : MonoBehaviour
     }
 
 
+
+    // removes the first char of the current word
     public void RemoveFirstChar()
     {
         fullText = fullText.Remove(0, 1).Trim();

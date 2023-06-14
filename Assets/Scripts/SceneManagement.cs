@@ -10,15 +10,15 @@ using System.ComponentModel;
 public class SceneManagement : MonoBehaviour
 {
     public static SceneManagement Instance;
-   [SerializeField] private TMP_Dropdown dropdown;
-   
+    [SerializeField] private TMP_Dropdown dropdown;
+
     private void Awake()
     {
         Instance = this;
     }
     public void LoadScene(ModeType mode)
     {
-       string sceneName = mode.DisplayName();
+        string sceneName = mode.DisplayName();
         SceneManager.LoadScene(sceneName);
     }
     public void LoadScene(string mode)
@@ -26,13 +26,10 @@ public class SceneManagement : MonoBehaviour
         SceneManager.LoadScene(mode);
     }
 
-
-
-
     public void StartScene(string mode)
     {
-/*        int selectedValue = dropdown.value;
-        string mode = dropdown.options[selectedValue].text.Replace(" ", "");*/
+        /*        int selectedValue = dropdown.value;
+                string mode = dropdown.options[selectedValue].text.Replace(" ", "");*/
         SceneManager.LoadScene(mode);
     }
 

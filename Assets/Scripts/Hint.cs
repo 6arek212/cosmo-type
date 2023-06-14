@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+///  this script shows a hint for some time and disable the object
+/// </summary>
 public class Hint : MonoBehaviour
 {
     [SerializeField] float showFor = 3f;
@@ -24,5 +28,4 @@ public class Hint : MonoBehaviour
         yield return new WaitForSeconds(showFor);
         gameObject.SetActive(false);
     }
-
 }

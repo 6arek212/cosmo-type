@@ -14,6 +14,10 @@ public class GameStats
 }
 
 
+
+/// <summary>
+/// game timer class
+/// </summary>
 public class GameTimer
 {
     private int time = 0;
@@ -40,6 +44,9 @@ public class GameTimer
 }
 
 
+/// <summary>
+/// this class keep track of the game stats
+/// </summary>
 public class StatsManager : MonoBehaviour
 {
     [SerializeField] GUIMeshText timer;
@@ -72,6 +79,7 @@ public class StatsManager : MonoBehaviour
     }
 
 
+    // return an object with the current stats
     public GameStats GetStats()
     {
         return new GameStats
@@ -84,6 +92,8 @@ public class StatsManager : MonoBehaviour
         };
     }
 
+
+    // start the game timer
     private IEnumerator startTimer()
     {
         while (true)

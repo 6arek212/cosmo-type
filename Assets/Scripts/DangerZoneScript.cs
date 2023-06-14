@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System;
-// This Script represents the danger zone in buttom.
 
+
+// This Script represents the danger zone in buttom.
 public class DangerZoneScript : MonoBehaviour
 {
     private const string enemyTag = "Enemy";
@@ -27,7 +28,6 @@ public class DangerZoneScript : MonoBehaviour
 
     [SerializeField]
     private GameObject canvasManager;
-
 
 
     private void Start()
@@ -57,11 +57,12 @@ public class DangerZoneScript : MonoBehaviour
         canvasManager.GetComponentInChildren<ExistMenu>().SetGameOver();
         Debug.Log(statsManager.GetStats().accurecy);
     }
+
+    // leave the current game
     public void LeaveGame()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MAIN_MENU");
-
     }
 
 }

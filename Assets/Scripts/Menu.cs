@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
-   [SerializeField] private string menuName;
-   [SerializeField] private bool open;
+
+    [SerializeField] private string menuName;
+    [SerializeField] private bool open;
+
     public void Open()
     {
         open = true;
         gameObject.SetActive(true);
- 
     }
-
 
     public void Close()
     {
@@ -20,17 +18,8 @@ public class Menu : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public string GetMenuName()
-    {
-        return menuName;
-    }
+    public string GetMenuName() => menuName;
 
-
-    public bool IsOpen()
-    {
-        return open;
-    }
-
-
+    public bool IsOpen() => open;
 
 }
