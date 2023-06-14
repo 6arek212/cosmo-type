@@ -22,12 +22,9 @@ public class ExistMenu : MonoBehaviourPunCallbacks
         {
             ShowMenu();
         }
-
-
     }
 
-
-
+    // show the game menu
     public void ShowMenu()
     {
         if (enablePause)
@@ -38,6 +35,7 @@ public class ExistMenu : MonoBehaviourPunCallbacks
         ExitMenuPanel.SetActive(true);
     }
 
+    // hide the game menu
     public void HideMenu()
     {
         if (enablePause)
@@ -47,6 +45,7 @@ public class ExistMenu : MonoBehaviourPunCallbacks
         MenuIsActive = false;
         ExitMenuPanel.SetActive(false);
     }
+
 
     public void LeaveMultiPlayerLobby()
     {

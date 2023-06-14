@@ -148,6 +148,7 @@ public class ShootingScript : MonoBehaviour
         obj.transform.parent = transform;
     }
 
+    // sets the current keyboard language
     public void SetLanguage(LangKey langKey) => currentLangKey = langKey;
     public void SetLanguage(string langKey)
     {

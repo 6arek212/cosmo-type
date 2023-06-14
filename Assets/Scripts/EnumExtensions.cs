@@ -5,6 +5,9 @@ using System.Reflection;
 
 namespace Assets.Scripts
 {
+    /// <summary>
+    /// for adding attributes to ENUM classes
+    /// </summary>
     public static class EnumExtensions
     {
         private static readonly

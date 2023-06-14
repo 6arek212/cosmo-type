@@ -14,6 +14,9 @@ namespace Assets.Scripts
     }
 
 
+    /// <summary>
+    ///  this class for mapping the english charachters to hebrew
+    /// </summary>
     public static class KeyboardTranslation
     {
         private readonly static Dictionary<char, char> HETranslationMap = new Dictionary<char, char>()
