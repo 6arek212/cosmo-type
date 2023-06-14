@@ -14,10 +14,34 @@ public class GameStats
 }
 
 
+public class GameTimer
+{
+    private int time = 0;
+
+    public void IncreseScond() => time++;
+    public string GetTime()
+    {
+        int min = time / 60;
+        int seconds = time % 60;
+        string returnString = "";
+
+        if (min < 10)
+            returnString += "0";
+        returnString += min.ToString() + ":";
+
+        if (seconds < 10)
+            returnString += "0";
+        returnString += seconds.ToString();
+
+
+        return returnString;
+    }
+
+}
+
 
 public class StatsManager : MonoBehaviour
 {
-
     [SerializeField] GUIMeshText timer;
     [SerializeField] GUIMeshText accurecyUI;
     [SerializeField] GUIMeshText wordsTypedUI;
@@ -29,7 +53,7 @@ public class StatsManager : MonoBehaviour
     [SerializeField] public int waveReached;
     [SerializeField] public int wordsTyped;
 
-    [SerializeField] int time = 0;
+    [SerializeField] GameTimer gametimer = new GameTimer();
     private Coroutine timerCoroutine;
 
     // Start is called before the first frame update
@@ -41,8 +65,8 @@ public class StatsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        string current_accurecy = charactersTyped > 0 ? Math.Round( (float)charactersCorrect / charactersTyped * 100) + "%" : "0%";
-        timer.UpdateText($"Time:{time}");
+        string current_accurecy = charactersTyped > 0 ? Math.Round((float)charactersCorrect / charactersTyped * 100) + "%" : "0%";
+        timer.UpdateText($"Time:{gametimer.GetTime()}");
         accurecyUI.UpdateText($"Accurecy:{current_accurecy}");
         wordsTypedUI.UpdateText($"Words:{wordsTyped}");
     }
@@ -52,7 +76,6 @@ public class StatsManager : MonoBehaviour
     {
         return new GameStats
         {
-
             accurecy = charactersTyped > 0 ? Math.Round((float)charactersCorrect / charactersTyped * 100) + "%" : "0%",
             charactersCorrect = charactersCorrect + "",
             charactersTyped = charactersTyped + "",
@@ -65,7 +88,7 @@ public class StatsManager : MonoBehaviour
     {
         while (true)
         {
-            time++;
+            gametimer.IncreseScond();
             yield return new WaitForSeconds(1);
         }
     }

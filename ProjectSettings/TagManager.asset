@@ -19,6 +19,7 @@ TagManager:
   - CharacterPicker
   - CharcaterPickerManager
   - Shooting
+  - DangerZone
   layers:
   - Default
   - TransparentFX
