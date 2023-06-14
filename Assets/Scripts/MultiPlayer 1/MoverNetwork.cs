@@ -90,7 +90,5 @@ public class MoverNetwork : MonoBehaviour
     }
 
 
-
-
     public void SetSpeed(float speed) => currentSpeed = initialSpeed = speed;
 }
