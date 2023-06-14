@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using static UnityEngine.GraphicsBuffer;
 using TMPro;
-
+using System;
 
 [System.Serializable]
 public class WordDataList
@@ -55,10 +55,13 @@ public class TargetsManager : MonoBehaviour
 
     [SerializeField] GameObject boss;
 
+    [SerializeField] DangerZoneScript dangerZone;
 
     [SerializeField] GameObject WavePanel;
 
     [SerializeField] public int wave = 1;
+
+    [SerializeField] int maxWave = 7;
 
     [SerializeField] float currentIntialSpeed = 4;
 
@@ -96,6 +99,7 @@ public class TargetsManager : MonoBehaviour
     void Start()
     {
         statsManager = GameObject.FindGameObjectWithTag("StatsManager").GetComponent<StatsManager>();
+        dangerZone = GameObject.FindGameObjectWithTag("DangerZone").GetComponent<DangerZoneScript>();
         if (mode == ModeType.TUTORIAL)
             return;
         targets = new List<GameObject>();
@@ -105,14 +109,12 @@ public class TargetsManager : MonoBehaviour
 
     // Loading words from json file
     private IEnumerator LoadWordsFromFile(string filename)
-
     {
         filename = string.Join("/", Application.streamingAssetsPath, "JsonFiles", mode.DisplayName(), filename);
 
         // In the Unity Editor, you need to use a different file access method
 
 #if UNITY_EDITOR
-        Debug.Log(filename);
         // Read the JSON file
         string jsonString = System.IO.File.ReadAllText(filename);
 
@@ -136,12 +138,13 @@ public class TargetsManager : MonoBehaviour
         {
             // display wave started
             isUIMessageDiplayed = true;
-            StartCoroutine(UpdateUI($"Wave {wave} starting"));
+            StartCoroutine(UpdateUI($"Wave {wave} Starting"));
             yield return new WaitUntil(() => !isUIMessageDiplayed);
 
             // load words
-            StartCoroutine(LoadWordsFromFile($"wave-{wave}.json"));
+            yield return LoadWordsFromFile($"wave-{wave}.json");
             yield return new WaitUntil(() => loadedWords != null);
+
 
             // spawn enemies
             StartCoroutine(Spawn());
@@ -156,13 +159,25 @@ public class TargetsManager : MonoBehaviour
             currentIntialSpeed = Mathf.Clamp(speedIncrease + currentIntialSpeed, 1, maxSpeed);
             spawnDelay = Mathf.Clamp(spawnDelay - spawnDelayDecreas, minSpawnDelay, float.MaxValue);
             currentParrallelEnemiesLimit = Mathf.Clamp(currentParrallelEnemiesLimit + enmeyIncrease, 1, maxParrallelEnemies);
+
+            if (wave > maxWave)
+            {
+                // end game 
+                onEndGame();
+                break;
+            }
         }
+    }
+
+
+    void onEndGame()
+    {
+        dangerZone.GameOver();
     }
 
 
     IEnumerator UpdateUI(string message)
     {
-
         WavePanel.SetActive(true);
         WavePanel.GetComponentInChildren<TMP_Text>().text = message;
         yield return new WaitForSeconds(2);
@@ -203,8 +218,8 @@ public class TargetsManager : MonoBehaviour
 
     protected Vector3 GetRandomSpawnPosition()
     {
-        float x = Random.Range(transform.position.x - maxSpawnHDistance, transform.position.x + maxSpawnHDistance);
-        float y = Random.Range(transform.position.y - maxSpawnVDistance, transform.position.y + maxSpawnVDistance);
+        float x = UnityEngine.Random.Range(transform.position.x - maxSpawnHDistance, transform.position.x + maxSpawnHDistance);
+        float y = UnityEngine.Random.Range(transform.position.y - maxSpawnVDistance, transform.position.y + maxSpawnVDistance);
         return new Vector3(x, y);
     }
 

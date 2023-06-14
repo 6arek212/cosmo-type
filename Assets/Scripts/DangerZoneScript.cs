@@ -28,7 +28,7 @@ public class DangerZoneScript : MonoBehaviour
     [SerializeField]
     private GameObject canvasManager;
 
-   
+
 
     private void Start()
     {
@@ -45,7 +45,7 @@ public class DangerZoneScript : MonoBehaviour
     }
 
     //go to the game over scene.
-    private void GameOver()
+    public void GameOver()
     {
         Time.timeScale = 0f;
         statsPanel.SetActive(true);

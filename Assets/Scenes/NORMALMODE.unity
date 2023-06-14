@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 36483945}
   m_Layer: 0
   m_Name: DangerZone
-  m_TagString: Untagged
+  m_TagString: DangerZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -987,8 +987,10 @@ MonoBehaviour:
   player: {fileID: 8977796728893042196}
   enemy: {fileID: 1502308913731659361, guid: 7c6b52ad6c70fc84ea71f8db5476866f, type: 3}
   boss: {fileID: 1502308913731659361, guid: b4bf00bea248d8644844de49e23f026b, type: 3}
+  dangerZone: {fileID: 0}
   WavePanel: {fileID: 811708066}
   wave: 1
+  maxWave: 7
   currentIntialSpeed: 1.4
   maxSpeed: 3.5
   maxSpawnHDistance: 14.5
@@ -1423,7 +1425,6 @@ MonoBehaviour:
   accurecy: 0
   waveReached: 0
   wordsTyped: 0
-  time: 0
 --- !u!114 &2131732405 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 522555221894193113, guid: c75916e91f5db6e4e8aa861fbbe5ca0b, type: 3}

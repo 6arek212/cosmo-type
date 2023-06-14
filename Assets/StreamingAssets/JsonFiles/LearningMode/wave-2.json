@@ -119,6 +119,21 @@
           "isRTL": true
         }
       ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "bottle",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "בקבוק",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
     }
   ]
 }

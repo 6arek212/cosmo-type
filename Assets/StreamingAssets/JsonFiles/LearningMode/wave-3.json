@@ -4,12 +4,12 @@
       "type": 0,
       "word": [
         {
-          "text": "light",
+          "text": "screen",
           "lang": "en",
           "isRTL": false
         },
         {
-          "text": "אור",
+          "text": "מסך",
           "lang": "he",
           "isRTL": true
         }
@@ -19,12 +19,12 @@
       "type": 0,
       "word": [
         {
-          "text": "sun",
+          "text": "wireless",
           "lang": "en",
           "isRTL": false
         },
         {
-          "text": "שמש",
+          "text": "אלחוטי",
           "lang": "he",
           "isRTL": true
         }
@@ -34,12 +34,12 @@
       "type": 0,
       "word": [
         {
-          "text": "door",
+          "text": "gold",
           "lang": "en",
           "isRTL": false
         },
         {
-          "text": "דלת",
+          "text": "זהב",
           "lang": "he",
           "isRTL": true
         }
@@ -49,12 +49,12 @@
       "type": 0,
       "word": [
         {
-          "text": "manager",
+          "text": "complex",
           "lang": "en",
           "isRTL": false
         },
         {
-          "text": "מנהל",
+          "text": "מורכב",
           "lang": "he",
           "isRTL": true
         }
@@ -64,12 +64,12 @@
       "type": 0,
       "word": [
         {
-          "text": "nature",
+          "text": "ancient",
           "lang": "en",
           "isRTL": false
         },
         {
-          "text": "טבע",
+          "text": "ישן",
           "lang": "he",
           "isRTL": true
         }
@@ -79,12 +79,12 @@
       "type": 0,
       "word": [
         {
-          "text": "unique",
+          "text": "soft",
           "lang": "en",
           "isRTL": false
         },
         {
-          "text": "יחודי",
+          "text": "עדין",
           "lang": "he",
           "isRTL": true
         }
@@ -94,12 +94,12 @@
       "type": 0,
       "word": [
         {
-          "text": "headphones",
+          "text": "terrible",
           "lang": "en",
           "isRTL": false
         },
         {
-          "text": "אוזניות",
+          "text": "גרוע",
           "lang": "he",
           "isRTL": true
         }
@@ -109,12 +109,72 @@
       "type": 0,
       "word": [
         {
-          "text": "pair",
+          "text": "nosie",
           "lang": "en",
           "isRTL": false
         },
         {
-          "text": "זוג",
+          "text": "רעש",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "camera",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "מצלמה",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "baby",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "תינוק",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "defeted",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "הפסיד",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "inteligent",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "חכם",
           "lang": "he",
           "isRTL": true
         }

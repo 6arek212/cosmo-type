@@ -1,25 +1,10 @@
 {
   "words": [
     {
-      "type": 1,
+      "type": 0,
       "word": [
         {
-          "text": "extraordinary",
-          "lang": "en",
-          "isRTL": false
-        },
-        {
-          "text": "orange",
-          "lang": "en",
-          "isRTL": false
-        },
-        {
-          "text": "cucumber",
-          "lang": "en",
-          "isRTL": false
-        },
-        {
-          "text": "carrot",
+          "text": "happy",
           "lang": "en",
           "isRTL": false
         }

@@ -4,12 +4,12 @@
       "type": 0,
       "word": [
         {
-          "text": "light",
+          "text": "friend",
           "lang": "en",
           "isRTL": false
         },
         {
-          "text": "אור",
+          "text": "חבר",
           "lang": "he",
           "isRTL": true
         }
@@ -19,12 +19,12 @@
       "type": 0,
       "word": [
         {
-          "text": "sun",
+          "text": "tracher",
           "lang": "en",
           "isRTL": false
         },
         {
-          "text": "שמש",
+          "text": "מורה",
           "lang": "he",
           "isRTL": true
         }
@@ -34,12 +34,12 @@
       "type": 0,
       "word": [
         {
-          "text": "door",
+          "text": "water",
           "lang": "en",
           "isRTL": false
         },
         {
-          "text": "דלת",
+          "text": "מים",
           "lang": "he",
           "isRTL": true
         }
@@ -49,12 +49,12 @@
       "type": 0,
       "word": [
         {
-          "text": "manager",
+          "text": "help",
           "lang": "en",
           "isRTL": false
         },
         {
-          "text": "מנהל",
+          "text": "עזרה",
           "lang": "he",
           "isRTL": true
         }
@@ -64,12 +64,12 @@
       "type": 0,
       "word": [
         {
-          "text": "nature",
+          "text": "elaborate",
           "lang": "en",
           "isRTL": false
         },
         {
-          "text": "טבע",
+          "text": "תסביר",
           "lang": "he",
           "isRTL": true
         }
@@ -79,12 +79,12 @@
       "type": 0,
       "word": [
         {
-          "text": "unique",
+          "text": "magnificent",
           "lang": "en",
           "isRTL": false
         },
         {
-          "text": "יחודי",
+          "text": "נפלא",
           "lang": "he",
           "isRTL": true
         }
@@ -94,12 +94,12 @@
       "type": 0,
       "word": [
         {
-          "text": "headphones",
+          "text": "innovative",
           "lang": "en",
           "isRTL": false
         },
         {
-          "text": "אוזניות",
+          "text": "חדשני",
           "lang": "he",
           "isRTL": true
         }
@@ -109,12 +109,138 @@
       "type": 0,
       "word": [
         {
-          "text": "pair",
+          "text": "vision",
           "lang": "en",
           "isRTL": false
         },
         {
-          "text": "זוג",
+          "text": "חזון",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "sensitive",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "רגיש",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "deep",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "עמוק",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "occean",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "ים",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "fork",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "מזלג",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "dynamic",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "דינאמי",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "healthy",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "בריא",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "graphics card",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "כרטיס מסך",
+          "lang": "he",
+          "isRTL": true
+        }
+      ]
+    },
+    {
+      "type": 0,
+      "word": [
+        {
+          "text": "bag",
+          "lang": "en",
+          "isRTL": false
+        },
+        {
+          "text": "תיק",
           "lang": "he",
           "isRTL": true
         }
