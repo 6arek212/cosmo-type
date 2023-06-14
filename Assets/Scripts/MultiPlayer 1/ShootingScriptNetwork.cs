@@ -3,12 +3,13 @@ using System.Linq;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 using System.IO;
-
+using TMPro;
 using Photon.Pun;
+using Photon.Realtime;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 // This Script represents the enemy shooting.
-public class ShootingScriptNetwork : MonoBehaviour
+public class ShootingScriptNetwork : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     PhotonView photonView;
@@ -19,9 +20,10 @@ public class ShootingScriptNetwork : MonoBehaviour
     [SerializeField]
     private GameObject explosion;
 
- 
-
     [SerializeField]
+    private TMP_Text accurecyText;  
+
+    [SerializeField] 
     private GameObject shoot_effect;
 
     [SerializeField]
@@ -81,9 +83,9 @@ public class ShootingScriptNetwork : MonoBehaviour
         }
         statsManager.IncreaseCharactersTyped();
         GameStats stats = statsManager.GetStats();
-   
-        UpdateStats(stats.accurecy);
 
+
+        UpdateStats(stats.accurecy);
     }
 
     GameObject LockOnTarget(string pressedKey)
@@ -143,9 +145,13 @@ public class ShootingScriptNetwork : MonoBehaviour
         obj.transform.parent = transform;
     }
 
+
+
+
+
     public void UpdateStats(string accurecy)
     {
-        photonView.RPC(nameof(UpdateStatsRPC), photonView.Owner,accurecy);
+        photonView.RPC(nameof(UpdateStatsRPC), photonView.Owner, accurecy);
     }
 
 
@@ -155,7 +161,6 @@ public class ShootingScriptNetwork : MonoBehaviour
         Hashtable hash = new Hashtable();
         hash.Add("accurecy", accurecy);
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-      
 
     }
 

@@ -60,6 +60,7 @@ MonoBehaviour:
   - MoveEnemeyRPC
   - UpdateEnemyPosRPC
   - MoveUpRPC
+  - UpdateAccurecyRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

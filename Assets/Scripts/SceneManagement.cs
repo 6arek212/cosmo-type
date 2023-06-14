@@ -11,6 +11,7 @@ public class SceneManagement : MonoBehaviour
 {
     public static SceneManagement Instance;
    [SerializeField] private TMP_Dropdown dropdown;
+   
     private void Awake()
     {
         Instance = this;
@@ -25,10 +26,13 @@ public class SceneManagement : MonoBehaviour
         SceneManager.LoadScene(mode);
     }
 
-    public void StartModeMainMenu()
+
+
+
+    public void StartScene(string mode)
     {
-        int selectedValue = dropdown.value;
-        string mode = dropdown.options[selectedValue].text.Replace(" ", "");
+/*        int selectedValue = dropdown.value;
+        string mode = dropdown.options[selectedValue].text.Replace(" ", "");*/
         SceneManager.LoadScene(mode);
     }
 

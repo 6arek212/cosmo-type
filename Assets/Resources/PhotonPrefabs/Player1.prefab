@@ -4907,6 +4907,7 @@ MonoBehaviour:
   photonView: {fileID: 5698841144689199229}
   BulletObject: {fileID: 5206607214389492286, guid: a5f97a6ef12f376459a41e31da74c0a1, type: 3}
   explosion: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
+  accurecyText: {fileID: 1992734761174034380}
   shoot_effect: {fileID: 100002, guid: 565cdc2ed7b030a41accd8f00ae59a50, type: 3}
   shootSoundEffect: {fileID: 8300000, guid: 05bc727344d395747964c2caf5a062c7, type: 3}
   expSoundEffect: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
@@ -5471,3 +5472,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f17d530ca0040ea41aaa7f02d828128d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  accurecyText: {fileID: 1992734761174034380}
