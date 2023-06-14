@@ -3,8 +3,8 @@ using UnityEngine;
 public class Menu : MonoBehaviour
 {
 
-   [SerializeField] private string menuName;
-   [SerializeField] private bool open;
+    [SerializeField] private string menuName;
+    [SerializeField] private bool open;
 
     public void Open()
     {
@@ -18,14 +18,8 @@ public class Menu : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public string GetMenuName()
-    {
-        return menuName;
-    }
+    public string GetMenuName() => menuName;
 
-    public bool IsOpen()
-    {
-        return open;
-    }
+    public bool IsOpen() => open;
 
 }
