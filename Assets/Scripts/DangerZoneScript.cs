@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System;
 
-
 // This Script represents the danger zone in buttom.
 public class DangerZoneScript : MonoBehaviour
 {
@@ -17,23 +16,26 @@ public class DangerZoneScript : MonoBehaviour
     [SerializeField]
     private TMP_Text finalScoreText;
 
-
     [SerializeField]
     private TMP_Text accuracyText;
 
     [SerializeField]
     private TMP_Text waveReachedText;
+
     [SerializeField]
     private GameObject statsPanel;
 
     [SerializeField]
     private GameObject canvasManager;
 
-
     private void Start()
     {
-        targetsManager = GameObject.FindGameObjectWithTag("TargetsManager").GetComponent<TargetsManager>();
-        statsManager = GameObject.FindGameObjectWithTag("StatsManager").GetComponent<StatsManager>();
+        targetsManager = GameObject
+            .FindGameObjectWithTag("TargetsManager")
+            .GetComponent<TargetsManager>();
+        statsManager = GameObject
+            .FindGameObjectWithTag("StatsManager")
+            .GetComponent<StatsManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -64,5 +66,4 @@ public class DangerZoneScript : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("MAIN_MENU");
     }
-
 }

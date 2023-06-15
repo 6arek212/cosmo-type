@@ -4,20 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 using System.IO;
-
-/*[Serializable]
-public class Word
-{
-    public bool isRTL;
-    public string lang;
-    public string text;
-
-    public override string ToString()
-    {
-        return text.Replace(" ", "");
-    }
-}*/
 
 public class TextTypeNetwork : MonoBehaviour
 {
@@ -64,11 +52,14 @@ public class TextTypeNetwork : MonoBehaviour
     void Start()
     {
         shipMover = GetComponent<MoverNetwork>();
-
         targetsManager = GameObject
             .FindGameObjectWithTag("TargetsManager")
             .GetComponent<TargetsManagerNetWork>();
+        UpdateTextTypeWords();
+    }
 
+    public void UpdateTextTypeWords()
+    {
         if (words.Count > 0)
         {
             // use words list object
@@ -104,18 +95,6 @@ public class TextTypeNetwork : MonoBehaviour
         public List<Word> Words;
     }
 
-    [PunRPC]
-    private void SetWordsRPC(string json)
-    {
-        // Convert the JSON back to a list of words
-        WordsData data = JsonUtility.FromJson<WordsData>(json);
-        this.words = data.Words;
-        text.UpdateText(this.words.First());
-        fullText = string.Join("", this.words);
-        currentWordLength = text.CountNoSpaces();
-        health = fullText.Length;
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag != triggerTag)
@@ -134,22 +113,6 @@ public class TextTypeNetwork : MonoBehaviour
         photonView.RPC("OnHitRPC", RpcTarget.All, other.GetComponent<PhotonView>().ViewID);
     }
 
-    [PunRPC]
-    protected virtual void OnHitRPC(int otherViewId)
-    {
-        PhotonView otherPhotonView = PhotonView.Find(otherViewId);
-        if (otherPhotonView.Owner == PhotonNetwork.LocalPlayer)
-        {
-            PhotonNetwork.Destroy(otherPhotonView.gameObject);
-        }
-        health--;
-        Instantiate(hit_effect, transform.position, Quaternion.identity);
-        
-        shipMover.MoveUp(GetComponent<PhotonView>().ViewID);
-        if (health == 0)
-            ExplodeAndDestroy();
-    }
-
     protected void ExplodeAndDestroy()
     {
         if (photonView.IsMine)
@@ -165,6 +128,19 @@ public class TextTypeNetwork : MonoBehaviour
     public void RemoveFirstChar()
     {
         photonView.RPC("RemoveFirstCharRPC", RpcTarget.All);
+    }
+
+    public char FirstChar() => fullText.First();
+
+    public void ChangeCurrentWordColor()
+    {
+        photonView.RPC("ChangeCurrentWordColorRPC", RpcTarget.All);
+    }
+
+    // this returns the current full text length
+    public int FullTextLength
+    {
+        get { return fullText.Length; }
     }
 
     [PunRPC]
@@ -186,22 +162,37 @@ public class TextTypeNetwork : MonoBehaviour
         }
     }
 
-    public char FirstChar() => fullText.First();
-
-    public void ChangeCurrentWordColor()
-    {
-        photonView.RPC("ChangeCurrentWordColorRPC", RpcTarget.All);
-    }
-
     [PunRPC]
     public void ChangeCurrentWordColorRPC()
     {
         text.ChangeColor(Color.yellow);
     }
 
-    // this returns the current full text length
-    public int FullTextLength
+    [PunRPC]
+    protected virtual void OnHitRPC(int otherViewId)
     {
-        get { return fullText.Length; }
+        PhotonView otherPhotonView = PhotonView.Find(otherViewId);
+        if (otherPhotonView.Owner == PhotonNetwork.LocalPlayer)
+        {
+            PhotonNetwork.Destroy(otherPhotonView.gameObject);
+        }
+        health--;
+        Instantiate(hit_effect, transform.position, Quaternion.identity);
+
+        /*  shipMover.MoveUp(GetComponent<PhotonView>().ViewID);*/
+        if (health == 0)
+            ExplodeAndDestroy();
+    }
+
+    [PunRPC]
+    private void SetWordsRPC(string json)
+    {
+        // Convert the JSON back to a list of words
+        WordsData data = JsonUtility.FromJson<WordsData>(json);
+        this.words = data.Words;
+        text.UpdateText(this.words.First());
+        fullText = string.Join("", this.words);
+        currentWordLength = text.CountNoSpaces();
+        health = fullText.Length;
     }
 }

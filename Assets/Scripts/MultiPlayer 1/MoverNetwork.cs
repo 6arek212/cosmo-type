@@ -1,12 +1,14 @@
 using UnityEngine;
 using UnityEngine.Experimental.AI;
 using Photon.Pun;
+
 public class MoverNetwork : MonoBehaviour
 {
     [SerializeField]
     public Transform playerTransform;
 
-    [SerializeField] float currentSpeed;
+    [SerializeField]
+    float currentSpeed;
 
     [SerializeField]
     public float initialSpeed = 0.3f;
@@ -24,21 +26,19 @@ public class MoverNetwork : MonoBehaviour
     private PhotonView photonView;
     private Vector3 currentPosition;
 
-
-
     private Rigidbody2D rb;
 
     private Vector3 currentTarget;
 
     public float Dist() => Vector3.Distance(transform.position, playerTransform.position);
 
-    public float DistFromCenter() => Mathf.Abs(Camera.main.transform.position.y - transform.position.y);
+    public float DistFromCenter() =>
+        Mathf.Abs(Camera.main.transform.position.y - transform.position.y);
 
     private void OnDisable()
     {
         rb.velocity = new Vector3();
     }
-
 
     private void Start()
     {
@@ -50,9 +50,8 @@ public class MoverNetwork : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!photonView.IsMine) return;
-
-
+        if (!photonView.IsMine)
+            return;
 
         // Calculate direction from the ship to the player
         Vector3 direction = currentTarget - transform.position;
@@ -68,7 +67,6 @@ public class MoverNetwork : MonoBehaviour
         currentSpeed = Mathf.Clamp(currentSpeed, initialSpeed, maxSpeed);
     }
 
-
     public void UpdateEnemyPos()
     {
         photonView.RPC(nameof(UpdateEnemyPosRPC), RpcTarget.All);
@@ -82,13 +80,12 @@ public class MoverNetwork : MonoBehaviour
 
     public void MoveUp(int viewId)
     {
-
         PhotonView otherPhotonView = PhotonView.Find(viewId);
-        Vector3 direction = playerTransform.position - otherPhotonView.gameObject.transform.position;
+        Vector3 direction =
+            playerTransform.position - otherPhotonView.gameObject.transform.position;
         direction.Normalize();
         transform.position -= direction * hitMovementDistance;
     }
-
 
     public void SetSpeed(float speed) => currentSpeed = initialSpeed = speed;
 }

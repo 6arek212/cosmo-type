@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class ScoreboardMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject scoreboardPanel;
+    [SerializeField]
+    private GameObject scoreboardPanel;
     private bool MenuIsActive = false;
     private bool isGameOver = false;
+
     private void Update()
     {
-        if (!Input.GetKeyDown(KeyCode.Tab)) return;
+        if (!Input.GetKeyDown(KeyCode.Tab))
+            return;
 
         if (MenuIsActive)
         {
@@ -20,22 +23,16 @@ public class ScoreboardMenu : MonoBehaviour
             ShowMenu();
         }
     }
- 
 
     public void ShowMenu()
     {
- 
         MenuIsActive = true;
         scoreboardPanel.SetActive(true);
     }
 
     public void HideMenu()
     {
-    
         MenuIsActive = false;
         scoreboardPanel.SetActive(false);
     }
-
-
-
 }

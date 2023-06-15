@@ -4,22 +4,24 @@ using Unity.VisualScripting;
 
 namespace Assets.Scripts
 {
-
     public enum LangKey
     {
         [Description("en")]
         ENGLISH,
+
         [Description("he")]
         HEBREW
     }
-
 
     /// <summary>
     ///  this class for mapping the english charachters to hebrew
     /// </summary>
     public static class KeyboardTranslation
     {
-        private readonly static Dictionary<char, char> HETranslationMap = new Dictionary<char, char>()
+        private readonly static Dictionary<char, char> HETranslationMap = new Dictionary<
+            char,
+            char
+        >()
         {
             { 'a', 'ש' },
             { 'b', 'נ' },

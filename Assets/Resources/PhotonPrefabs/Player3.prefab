@@ -4907,7 +4907,7 @@ MonoBehaviour:
   photonView: {fileID: 5698841144689199229}
   BulletObject: {fileID: 6231678630676928226, guid: 766d64333dd840244bedca6aed421d9f, type: 3}
   explosion: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
-  targetsManager: {fileID: 0}
+  accurecyText: {fileID: 0}
   shoot_effect: {fileID: 100002, guid: 9d2eaafa06a959e4fa75f1e83db03028, type: 3}
   shootSoundEffect: {fileID: 8300000, guid: 05bc727344d395747964c2caf5a062c7, type: 3}
   expSoundEffect: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}

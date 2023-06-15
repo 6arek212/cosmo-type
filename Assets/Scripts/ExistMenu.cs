@@ -1,7 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
-
+using Photon.Realtime;
 public class ExistMenu : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject ExitMenuPanel;
@@ -9,6 +9,7 @@ public class ExistMenu : MonoBehaviourPunCallbacks
     [SerializeField] private bool enablePause;
     public static bool MenuIsActive = false;
     private bool isGameOver = false;
+    private bool isLeavingRoom = false;
     private void Update()
     {
         if (!Input.GetKeyDown(KeyCode.Escape) || isGameOver) return;
@@ -43,10 +44,33 @@ public class ExistMenu : MonoBehaviourPunCallbacks
 
     public void LeaveMultiPlayerLobby()
     {
-        HideMenu();
-        PhotonNetwork.Disconnect();
-        SceneManager.LoadScene("MAIN_MENU");
+        if (PhotonNetwork.InRoom)
+        {
+            isLeavingRoom = true;
+            PhotonNetwork.LeaveRoom();
+        }
+        else
+        {
+            PhotonNetwork.Disconnect();
+            LoadMainMenu();
+        }
     }
+
+    public override void OnLeftRoom()
+    {
+        if (isLeavingRoom)
+        {
+            isLeavingRoom = false;
+            PhotonNetwork.Disconnect();
+        }
+    }
+
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+            LoadMainMenu();
+    }
+
 
     public void LoadMainMenu()
     {

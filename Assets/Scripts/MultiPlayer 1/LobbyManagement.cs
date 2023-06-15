@@ -5,8 +5,6 @@ using Photon.Realtime;
 using TMPro;
 using System;
 
-
-
 /*This class represents the lobby manager in the game. It handles various lobby-related functionalities and interactions.*/
 
 public class LobbyManagement : MonoBehaviourPunCallbacks
@@ -43,14 +41,20 @@ public class LobbyManagement : MonoBehaviourPunCallbacks
 
     [SerializeField]
     private GameObject startGameBtn;
+    const int maxRoomSize = 4;
+    private string currentMenu;
 
     ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
-
-
 
     //Connect to the server.
     public void Connect()
     {
+        if (string.IsNullOrEmpty(playerName.text))
+        {
+            ShowError("Connection failed: Player name is required");
+            currentMenu = "connect";
+            return;
+        }
         Debug.Log("Connecting to Master");
         PhotonNetwork.ConnectUsingSettings();
         MenuManager.Instance.OpenMenu("loading");
@@ -61,7 +65,7 @@ public class LobbyManagement : MonoBehaviourPunCallbacks
     {
         Debug.Log("Connected to Master");
         PhotonNetwork.JoinLobby();
-        //switch the scene for all the players 
+        //switch the scene for all the players
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
@@ -74,7 +78,6 @@ public class LobbyManagement : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.NickName = playerName.text;
         }
-       
     }
 
     // Open the lobby creation menu when the create room button is clicked.
@@ -87,11 +90,27 @@ public class LobbyManagement : MonoBehaviourPunCallbacks
     public void CreateRoom()
     {
         if (!CheckValidations())
+        {
+            ShowError("Room creating falid: lobby Name and lobby players limit are required");
+            currentMenu = "lobby";
             return;
-        int lobbyLimit = Int32.Parse(maxPlayersInput.text);
+        }
+        int roomLimit = Int32.Parse(maxPlayersInput.text);
+        if (roomLimit > maxRoomSize || roomLimit == 0)
+        {
+            ShowError("Room creating falid: max room size is: " + maxRoomSize);
+            currentMenu = "lobby";
+            return;
+        }
+
         PhotonNetwork.CreateRoom(
             lobbyNameInput.text,
-            new RoomOptions() { MaxPlayers = lobbyLimit , IsVisible = true ,BroadcastPropsChangeToAll=true}
+            new RoomOptions()
+            {
+                MaxPlayers = roomLimit,
+                IsVisible = true,
+                BroadcastPropsChangeToAll = true
+            }
         );
         MenuManager.Instance.OpenMenu("loading");
     }
@@ -120,13 +139,10 @@ public class LobbyManagement : MonoBehaviourPunCallbacks
         MenuManager.Instance.OpenMenu("room");
         roomName.text = PhotonNetwork.CurrentRoom.Name;
         UpdateRoomPlayersCount();
-        UpdatePlayerList(); // when we joind the room 
+        UpdatePlayerList(); // when we joind the room
         ClearnInputs();
         CheckGameReady();
-  
     }
-
-  
 
     // Callback when the master client switches in the room.
     public override void OnMasterClientSwitched(Player newMasterClient)
@@ -137,8 +153,8 @@ public class LobbyManagement : MonoBehaviourPunCallbacks
     // Callback when room creation fails.
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        errorText.text = "Room Creating Failed: " + message;
-        MenuManager.Instance.OpenMenu("error");
+        ShowError(message);
+        currentMenu = "lobby";
     }
 
     // Leave the current room when the leave room button is clicked.
@@ -159,7 +175,6 @@ public class LobbyManagement : MonoBehaviourPunCallbacks
     // Callback for updating the room list.
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-       
         foreach (Transform trams in roomListContent)
         {
             Destroy(trams.gameObject);
@@ -174,7 +189,7 @@ public class LobbyManagement : MonoBehaviourPunCallbacks
     }
 
     // Callback when a new player enters the room.
-    public override void OnPlayerEnteredRoom(Player newPlayer) 
+    public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Instantiate(playerListItemPrefab, playerListContent)
             .GetComponent<PlayerListItem>()
@@ -195,9 +210,7 @@ public class LobbyManagement : MonoBehaviourPunCallbacks
             PlayerListItem newPlayer = Instantiate(playerListItemPrefab, playerListContent)
                 .GetComponent<PlayerListItem>();
             newPlayer.SetUp(player);
-       
         }
-
     }
 
     // Clear the input fields.
@@ -239,5 +252,14 @@ public class LobbyManagement : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel("MULTIPLAYER");
     }
 
+    public void ShowError(string message)
+    {
+        errorText.text = message;
+        MenuManager.Instance.OpenMenu("error");
+    }
 
+    public void OnErrorOk()
+    {
+        MenuManager.Instance.OpenMenu(currentMenu);
+    }
 }

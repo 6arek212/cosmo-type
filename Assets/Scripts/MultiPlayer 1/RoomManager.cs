@@ -12,7 +12,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-
         /*       if (Instance == null)
                {
                    Instance = this;
@@ -47,7 +46,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Debug.Log(count);
         if (scene.buildIndex == 1) // we are in the game.
         {
-
             PhotonNetwork.Instantiate(
                 Path.Combine("PhotonPrefabs", "PlayerManager"),
                 Vector3.zero,
@@ -55,6 +53,5 @@ public class RoomManager : MonoBehaviourPunCallbacks
             );
             count++;
         }
-        
     }
 }
