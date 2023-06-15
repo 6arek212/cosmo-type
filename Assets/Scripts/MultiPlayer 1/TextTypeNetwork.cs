@@ -35,7 +35,6 @@ public class TextTypeNetwork : MonoBehaviour
 
     [SerializeField]
     private GameObject hit_effect;
-    private Color[] colors = new Color[5];
 
     /*    [SerializeField] private explosion*/
     [SerializeField]
@@ -48,13 +47,11 @@ public class TextTypeNetwork : MonoBehaviour
     private int currentWordLength;
     private string fullText;
     private int health;
-    ExitGames.Client.Photon.Hashtable playerProperties = PhotonNetwork.LocalPlayer.CustomProperties;
 
     // Start is called before the first frame update
     void Start()
     {
         shipMover = GetComponent<MoverNetwork>();
-        InitializeColors();
         targetsManager = GameObject
             .FindGameObjectWithTag("TargetsManager")
             .GetComponent<TargetsManagerNetWork>();
@@ -82,15 +79,6 @@ public class TextTypeNetwork : MonoBehaviour
             };
             SetWords(words);
         }
-    }
-
-    public void InitializeColors()
-    {
-        colors[0] = Color.red;
-        colors[1] = Color.green;
-        colors[2] = new Color(0.886f, 0.482f, 0.055f, 1.0f);
-        colors[3] = Color.white;
-        colors[4] = Color.gray;
     }
 
     public void SetWords(List<Word> words)
@@ -155,15 +143,6 @@ public class TextTypeNetwork : MonoBehaviour
         get { return fullText.Length; }
     }
 
-    public int GetPlayerCharacter()
-    {
-        if (!playerProperties.ContainsKey("playerAvatar"))
-            return 0;
-
-        int avatarIndex = (int)playerProperties["playerAvatar"];
-        return avatarIndex;
-    }
-
     [PunRPC]
     public void RemoveFirstCharRPC()
     {
@@ -186,9 +165,7 @@ public class TextTypeNetwork : MonoBehaviour
     [PunRPC]
     public void ChangeCurrentWordColorRPC()
     {
-        int index = GetPlayerCharacter();
-        Debug.Log(index);
-        text.ChangeColor(colors[index]);
+        text.ChangeColor(Color.yellow);
     }
 
     [PunRPC]
