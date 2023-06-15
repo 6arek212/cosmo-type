@@ -30,7 +30,9 @@ public class TextType : MonoBehaviour
     [SerializeField] TargetsManager targetsManager;
 
     [SerializeField] private List<Word> words;
+
     [SerializeField] private AudioClip expSoundEffect;
+
     [SerializeField] private GameObject hit_effect;
 
     private ShootingScript shooting;
@@ -125,10 +127,12 @@ public class TextType : MonoBehaviour
         text.RemoveFirstChar();
         currentWordLength--;
 
+        // word ended
         if (currentWordLength == 0)
         {
             words.RemoveAt(0);
 
+            // pick new word
             if (words.Count > 0)
             {
                 currentWordLength = words.First().text.Length;

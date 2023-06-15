@@ -145,8 +145,6 @@ public class TargetsManager : MonoBehaviour
 
             // load words
             yield return LoadWordsFromFile($"wave-{wave}.json");
-            //yield return new WaitUntil(() => loadedWords != null);
-
 
             // spawn enemies
             StartCoroutine(Spawn());
@@ -155,7 +153,6 @@ public class TargetsManager : MonoBehaviour
 
             // show animation for ending rouund and wait 
             yield return new WaitForSeconds(waveEndDelay);
-
 
             UpdateGameConfigurations();
 
