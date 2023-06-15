@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 /// <summary>
 /// handling the button hover
 /// </summary>
 public class ButtonHover : MonoBehaviour
 {
+    [SerializeField]
+    private AudioSource audioSource;
 
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip hoverSoundEffect;
+    [SerializeField]
+    private AudioClip hoverSoundEffect;
 
     public void OnHover()
     {

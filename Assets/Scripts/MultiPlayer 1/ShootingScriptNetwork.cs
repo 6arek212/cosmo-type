@@ -21,9 +21,9 @@ public class ShootingScriptNetwork : MonoBehaviourPunCallbacks
     private GameObject explosion;
 
     [SerializeField]
-    private TMP_Text accurecyText;  
+    private TMP_Text accurecyText;
 
-    [SerializeField] 
+    [SerializeField]
     private GameObject shoot_effect;
 
     [SerializeField]
@@ -35,18 +35,18 @@ public class ShootingScriptNetwork : MonoBehaviourPunCallbacks
     [SerializeField]
     private AudioClip missSoundEffect;
 
-
     private TargetsManagerNetWork targetsManager;
     private StatsManagerNetwork statsManager;
     private GameObject currentTarget;
-
 
     private void Start()
     {
         targetsManager = GameObject
             .FindGameObjectWithTag("TargetsManager")
             .GetComponent<TargetsManagerNetWork>();
-        statsManager = GameObject.FindGameObjectWithTag("StatsManager").GetComponent<StatsManagerNetwork>();
+        statsManager = GameObject
+            .FindGameObjectWithTag("StatsManager")
+            .GetComponent<StatsManagerNetwork>();
     }
 
     void Update()
@@ -84,7 +84,6 @@ public class ShootingScriptNetwork : MonoBehaviourPunCallbacks
         statsManager.IncreaseCharactersTyped();
         GameStats stats = statsManager.GetStats();
 
-
         UpdateStats(stats.accurecy);
     }
 
@@ -108,7 +107,6 @@ public class ShootingScriptNetwork : MonoBehaviourPunCallbacks
     {
         photonView.RPC("ShootRPC", RpcTarget.All);
     }
- 
 
     [PunRPC]
     private void ShootRPC()
@@ -145,15 +143,10 @@ public class ShootingScriptNetwork : MonoBehaviourPunCallbacks
         obj.transform.parent = transform;
     }
 
-
-
-
-
     public void UpdateStats(string accurecy)
     {
         photonView.RPC(nameof(UpdateStatsRPC), photonView.Owner, accurecy);
     }
-
 
     [PunRPC]
     private void UpdateStatsRPC(string accurecy)
@@ -161,9 +154,7 @@ public class ShootingScriptNetwork : MonoBehaviourPunCallbacks
         Hashtable hash = new Hashtable();
         hash.Add("accurecy", accurecy);
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-
     }
-
 
     private void playShootSound()
     {

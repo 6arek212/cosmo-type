@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BackgroundMusic : MonoBehaviour
 {
-
     public AudioSource musicPlayer; // the bgm audio source and/or whatever else you need
     public static BackgroundMusic Instance { get; private set; }
 
@@ -18,5 +17,4 @@ public class BackgroundMusic : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         Instance = this;
     }
-
 }

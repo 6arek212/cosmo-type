@@ -4,20 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 using System.IO;
-
-/*[Serializable]
-public class Word
-{
-    public bool isRTL;
-    public string lang;
-    public string text;
-
-    public override string ToString()
-    {
-        return text.Replace(" ", "");
-    }
-}*/
 
 public class TextTypeNetwork : MonoBehaviour
 {
@@ -47,6 +35,7 @@ public class TextTypeNetwork : MonoBehaviour
 
     [SerializeField]
     private GameObject hit_effect;
+    private Color[] colors = new Color[5];
 
     /*    [SerializeField] private explosion*/
     [SerializeField]
@@ -59,16 +48,21 @@ public class TextTypeNetwork : MonoBehaviour
     private int currentWordLength;
     private string fullText;
     private int health;
+    ExitGames.Client.Photon.Hashtable playerProperties = PhotonNetwork.LocalPlayer.CustomProperties;
 
     // Start is called before the first frame update
     void Start()
     {
         shipMover = GetComponent<MoverNetwork>();
-
+        InitializeColors();
         targetsManager = GameObject
             .FindGameObjectWithTag("TargetsManager")
             .GetComponent<TargetsManagerNetWork>();
+        UpdateTextTypeWords();
+    }
 
+    public void UpdateTextTypeWords()
+    {
         if (words.Count > 0)
         {
             // use words list object
@@ -90,6 +84,15 @@ public class TextTypeNetwork : MonoBehaviour
         }
     }
 
+    public void InitializeColors()
+    {
+        colors[0] = Color.red;
+        colors[1] = Color.green;
+        colors[2] = new Color(0.886f, 0.482f, 0.055f, 1.0f);
+        colors[3] = Color.white;
+        colors[4] = Color.gray;
+    }
+
     public void SetWords(List<Word> words)
     {
         string json = JsonUtility.ToJson(new WordsData { Words = words });
@@ -102,18 +105,6 @@ public class TextTypeNetwork : MonoBehaviour
     private class WordsData
     {
         public List<Word> Words;
-    }
-
-    [PunRPC]
-    private void SetWordsRPC(string json)
-    {
-        // Convert the JSON back to a list of words
-        WordsData data = JsonUtility.FromJson<WordsData>(json);
-        this.words = data.Words;
-        text.UpdateText(this.words.First());
-        fullText = string.Join("", this.words);
-        currentWordLength = text.CountNoSpaces();
-        health = fullText.Length;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -134,22 +125,6 @@ public class TextTypeNetwork : MonoBehaviour
         photonView.RPC("OnHitRPC", RpcTarget.All, other.GetComponent<PhotonView>().ViewID);
     }
 
-    [PunRPC]
-    protected virtual void OnHitRPC(int otherViewId)
-    {
-        PhotonView otherPhotonView = PhotonView.Find(otherViewId);
-        if (otherPhotonView.Owner == PhotonNetwork.LocalPlayer)
-        {
-            PhotonNetwork.Destroy(otherPhotonView.gameObject);
-        }
-        health--;
-        Instantiate(hit_effect, transform.position, Quaternion.identity);
-        
-        shipMover.MoveUp(GetComponent<PhotonView>().ViewID);
-        if (health == 0)
-            ExplodeAndDestroy();
-    }
-
     protected void ExplodeAndDestroy()
     {
         if (photonView.IsMine)
@@ -165,6 +140,28 @@ public class TextTypeNetwork : MonoBehaviour
     public void RemoveFirstChar()
     {
         photonView.RPC("RemoveFirstCharRPC", RpcTarget.All);
+    }
+
+    public char FirstChar() => fullText.First();
+
+    public void ChangeCurrentWordColor()
+    {
+        photonView.RPC("ChangeCurrentWordColorRPC", RpcTarget.All);
+    }
+
+    // this returns the current full text length
+    public int FullTextLength
+    {
+        get { return fullText.Length; }
+    }
+
+    public int GetPlayerCharacter()
+    {
+        if (!playerProperties.ContainsKey("playerAvatar"))
+            return 0;
+
+        int avatarIndex = (int)playerProperties["playerAvatar"];
+        return avatarIndex;
     }
 
     [PunRPC]
@@ -186,22 +183,39 @@ public class TextTypeNetwork : MonoBehaviour
         }
     }
 
-    public char FirstChar() => fullText.First();
-
-    public void ChangeCurrentWordColor()
-    {
-        photonView.RPC("ChangeCurrentWordColorRPC", RpcTarget.All);
-    }
-
     [PunRPC]
     public void ChangeCurrentWordColorRPC()
     {
-        text.ChangeColor(Color.yellow);
+        int index = GetPlayerCharacter();
+        Debug.Log(index);
+        text.ChangeColor(colors[index]);
     }
 
-    // this returns the current full text length
-    public int FullTextLength
+    [PunRPC]
+    protected virtual void OnHitRPC(int otherViewId)
     {
-        get { return fullText.Length; }
+        PhotonView otherPhotonView = PhotonView.Find(otherViewId);
+        if (otherPhotonView.Owner == PhotonNetwork.LocalPlayer)
+        {
+            PhotonNetwork.Destroy(otherPhotonView.gameObject);
+        }
+        health--;
+        Instantiate(hit_effect, transform.position, Quaternion.identity);
+
+        /*  shipMover.MoveUp(GetComponent<PhotonView>().ViewID);*/
+        if (health == 0)
+            ExplodeAndDestroy();
+    }
+
+    [PunRPC]
+    private void SetWordsRPC(string json)
+    {
+        // Convert the JSON back to a list of words
+        WordsData data = JsonUtility.FromJson<WordsData>(json);
+        this.words = data.Words;
+        text.UpdateText(this.words.First());
+        fullText = string.Join("", this.words);
+        currentWordLength = text.CountNoSpaces();
+        health = fullText.Length;
     }
 }

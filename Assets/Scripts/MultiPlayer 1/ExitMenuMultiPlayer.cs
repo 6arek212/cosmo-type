@@ -5,13 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class ExitMenuMultiPlayer : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private GameObject ExitMenuPanel;
+    [SerializeField]
+    private GameObject ExitMenuPanel;
     public static bool MenuIsActive = false;
     private bool isGameOver = false;
 
     private void Update()
     {
-        if (!Input.GetKeyDown(KeyCode.Escape)|| isGameOver) return;
+        if (!Input.GetKeyDown(KeyCode.Escape) || isGameOver)
+            return;
 
         if (MenuIsActive)
             HideMenu();
@@ -33,13 +35,13 @@ public class ExitMenuMultiPlayer : MonoBehaviourPunCallbacks
 
     public void LeaveGame()
     {
+        isGameOver = true;
         PhotonNetwork.DestroyPlayerObjects(PhotonNetwork.LocalPlayer);
         PhotonNetwork.LeaveRoom();
     }
 
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
-        isGameOver = true;
         Debug.Log("master switched");
         LeaveGame();
     }

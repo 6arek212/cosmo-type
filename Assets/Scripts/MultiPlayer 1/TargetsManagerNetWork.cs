@@ -5,12 +5,17 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+
 public class TargetsManagerNetWork : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     PhotonView photonView;
-    [SerializeField] private TMP_Text winnerName;
-    [SerializeField] private TMP_Text winnerAccurcey;
+
+    [SerializeField]
+    private TMP_Text winnerName;
+
+    [SerializeField]
+    private TMP_Text winnerAccurcey;
 
     [SerializeField]
     bool ranodomSpawn;
@@ -18,11 +23,9 @@ public class TargetsManagerNetWork : MonoBehaviourPunCallbacks
     private EnemySpawnManager enemySpawnerManager;
     private bool isGameOver = false;
 
-
-
     private void Start()
     {
-   /*     statsManager = GameObject.FindGameObjectWithTag("StatsManager").GetComponent<StatsManagerNetwork>();*/
+        /*     statsManager = GameObject.FindGameObjectWithTag("StatsManager").GetComponent<StatsManagerNetwork>();*/
         enemySpawnerManager = GameObject
             .FindGameObjectWithTag("EnemySpawnManager")
             .GetComponent<EnemySpawnManager>();
@@ -30,15 +33,13 @@ public class TargetsManagerNetWork : MonoBehaviourPunCallbacks
 
     public GameObject? FindTarget(GameObject gameObj, char searchChar)
     {
-
-        if (isGameOver) return null;
+        if (isGameOver)
+            return null;
 
         MeshText enemyText;
         float minDist = float.MaxValue;
         GameObject target = null;
         List<GameObject> targets = enemySpawnerManager.GetTargets();
-   
-
 
         foreach (GameObject enemy in targets)
         {
@@ -93,7 +94,6 @@ public class TargetsManagerNetWork : MonoBehaviourPunCallbacks
         );
     }
 
-
     public void CheckWinner()
     {
         Player highestAccuracyPlayer = null;
@@ -114,32 +114,23 @@ public class TargetsManagerNetWork : MonoBehaviourPunCallbacks
                         highestAccuracyPlayer = player;
                     }
                 }
-             
             }
-         
         }
 
         if (highestAccuracyPlayer != null)
         {
             winnerName.text = highestAccuracyPlayer.NickName + " WINS!!!";
-            winnerAccurcey.text = "Accurcey "+highestAccuracy;
+            winnerAccurcey.text = "Accurcey " + highestAccuracy;
         }
 
         isGameOver = true;
-
     }
-
-
-
 
     [PunRPC]
     private void RemoveTargetRPC(int viewId)
     {
         enemySpawnerManager.RemoveTarget(PhotonView.Find(viewId).gameObject);
-
     }
-
-
 
     public int Count
     {

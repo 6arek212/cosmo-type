@@ -8,33 +8,32 @@ using UnityEngine.UI;
 
 public class PlayerListItem : MonoBehaviourPunCallbacks
 {
+    [SerializeField]
+    TMP_Text playerNameText;
 
-    [SerializeField] TMP_Text playerNameText;
-    [SerializeField] TMP_Text statusText;
+    [SerializeField]
+    TMP_Text statusText;
 
-    [SerializeField] TMP_Text readyText;
+    [SerializeField]
+    TMP_Text readyText;
     Player player;
-
     public Image playerAvatar;
-
     private GameObject readyBtn;
     private LobbyManagement manager;
     private CharcaterPickerManager characterPickerManager;
-
+    private string IS_READY = "isReady";
     ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
-
 
     private void Awake()
     {
-        playerProperties["isReady"] = false;
+        playerProperties[IS_READY] = false;
         manager = GameObject
-       .FindGameObjectWithTag("LobbyManagement")
-       .GetComponent<LobbyManagement>();
-        readyBtn = GameObject
-       .FindGameObjectWithTag("ReadyButton");
+            .FindGameObjectWithTag("LobbyManagement")
+            .GetComponent<LobbyManagement>();
+        readyBtn = GameObject.FindGameObjectWithTag("ReadyButton");
         characterPickerManager = GameObject
-       .FindGameObjectWithTag("CharcaterPickerManager")
-       .GetComponent<CharcaterPickerManager>();
+            .FindGameObjectWithTag("CharcaterPickerManager")
+            .GetComponent<CharcaterPickerManager>();
         Button myButton = readyBtn.GetComponent<Button>();
         readyText = readyBtn.GetComponentInChildren<TMP_Text>();
         myButton.onClick.AddListener(OnReadyClicked);
@@ -57,31 +56,29 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
         }
     }
 
-    public override void OnLeftRoom()
-    {
-        Destroy(gameObject);
-    }
-
+    public override void OnLeftRoom() => Destroy(gameObject);
 
     public void OnReadyClicked()
     {
-        bool isReady = (bool)playerProperties["isReady"];
+        bool isReady = (bool)playerProperties[IS_READY];
         if (isReady)
         {
-            playerProperties["isReady"] = false;
-
+            playerProperties[IS_READY] = false;
         }
         else
         {
-            playerProperties["isReady"] = true;
+            playerProperties[IS_READY] = true;
         }
         PhotonNetwork.SetPlayerCustomProperties(playerProperties);
     }
 
-
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+    public override void OnPlayerPropertiesUpdate(
+        Player targetPlayer,
+        ExitGames.Client.Photon.Hashtable changedProps
+    )
     {
-        if (this.player != targetPlayer) return;
+        if (this.player != targetPlayer)
+            return;
 
         Debug.Log(changedProps);
         Debug.Log("Players List Updated");
@@ -90,7 +87,7 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
             UpdatePlayerAvater(targetPlayer);
         }
 
-        if (changedProps.ContainsKey("isReady"))
+        if (changedProps.ContainsKey(IS_READY))
         {
             UpdatePlayerStatus(targetPlayer);
             manager.CheckGameReady();
@@ -99,14 +96,13 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
 
     public void UpdatePlayerStatus(Player player)
     {
-        if (!player.CustomProperties.ContainsKey("isReady"))
+        if (!player.CustomProperties.ContainsKey(IS_READY))
         {
-            playerProperties["isReady"] = false;
-            UpdateReadyText("READY");
+            playerProperties[IS_READY] = false;
             return;
         }
 
-        bool isReady = (bool)player.CustomProperties["isReady"];
+        bool isReady = (bool)player.CustomProperties[IS_READY];
         if (isReady)
         {
             statusText.text = "Ready";
@@ -123,16 +119,16 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
 
     public void UpdateReadyText(string text)
     {
-        if (this.player != PhotonNetwork.LocalPlayer) return;
+        if (this.player != PhotonNetwork.LocalPlayer)
+            return;
 
         readyText.text = text;
     }
 
-
     public void UpdatePlayerAvater(Player player)
     {
-        if (!characterPickerManager) return;
+        if (!characterPickerManager)
+            return;
         characterPickerManager.UpdatePlayerAvater(player, playerAvatar);
     }
-
 }

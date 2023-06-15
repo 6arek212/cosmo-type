@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
@@ -47,9 +45,6 @@ public class MenuManager : MonoBehaviour
     {
         menu.Close();
     }
-
-
-
 }
 /*
     private void Update()
@@ -64,4 +59,3 @@ public class MenuManager : MonoBehaviour
         playerProperties["accurecy"] = accurecy;
         PhotonNetwork.LocalPlayer.SetCustomProperties(playerProperties);
     }*/
-
