@@ -84,6 +84,11 @@ public class TargetsManager : MonoBehaviour
     [SerializeField] int currentParrallelEnemiesLimit = 6;
 
     [SerializeField] private List<GameObject> targets;
+
+    [SerializeField] float waveMessageDelay = 3f;
+
+    [SerializeField] float waveEndDelay = 3f;
+
     public int Count { get { return targets.Count; } }
 
     [SerializeField] float speedIncrease = 0.04f;
@@ -93,7 +98,6 @@ public class TargetsManager : MonoBehaviour
 
     private IList<InnerWord> loadedWords;
 
-    private bool isUIMessageDiplayed = true;
 
     // Start is called before the first frame update
     void Start()
@@ -137,13 +141,11 @@ public class TargetsManager : MonoBehaviour
         while (true)
         {
             // display wave started
-            isUIMessageDiplayed = true;
-            StartCoroutine(UpdateUI($"Wave {wave} Starting"));
-            yield return new WaitUntil(() => !isUIMessageDiplayed);
+            yield return StartCoroutine(UpdateUI($"Wave {wave} Starting"));
 
             // load words
             yield return LoadWordsFromFile($"wave-{wave}.json");
-            yield return new WaitUntil(() => loadedWords != null);
+            //yield return new WaitUntil(() => loadedWords != null);
 
 
             // spawn enemies
@@ -152,23 +154,29 @@ public class TargetsManager : MonoBehaviour
             yield return new WaitUntil(() => targets.Count == 0);
 
             // show animation for ending rouund and wait 
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(waveEndDelay);
 
-            loadedWords = null;
-            wave++;
-            currentIntialSpeed = Mathf.Clamp(speedIncrease + currentIntialSpeed, 1, maxSpeed);
-            spawnDelay = Mathf.Clamp(spawnDelay - spawnDelayDecreas, minSpawnDelay, float.MaxValue);
-            currentParrallelEnemiesLimit = Mathf.Clamp(currentParrallelEnemiesLimit + enmeyIncrease, 1, maxParrallelEnemies);
 
+            UpdateGameConfigurations();
+
+            // end game 
             if (wave > maxWave)
             {
-                // end game 
                 onEndGame();
                 break;
             }
         }
     }
 
+
+    // updating the game setting including spawn delay , wave , and parrallel enimes limit
+    void UpdateGameConfigurations()
+    {
+        wave++;
+        currentIntialSpeed = Mathf.Clamp(speedIncrease + currentIntialSpeed, 1, maxSpeed);
+        spawnDelay = Mathf.Clamp(spawnDelay - spawnDelayDecreas, minSpawnDelay, float.MaxValue);
+        currentParrallelEnemiesLimit = Mathf.Clamp(currentParrallelEnemiesLimit + enmeyIncrease, 1, maxParrallelEnemies);
+    }
 
     void onEndGame()
     {
@@ -180,9 +188,8 @@ public class TargetsManager : MonoBehaviour
     {
         WavePanel.SetActive(true);
         WavePanel.GetComponentInChildren<TMP_Text>().text = message;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(waveMessageDelay);
         WavePanel.SetActive(false);
-        isUIMessageDiplayed = false;
     }
 
     protected virtual IEnumerator Spawn()
